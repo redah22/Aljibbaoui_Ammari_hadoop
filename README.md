@@ -22,8 +22,7 @@ Il est demandé de rédiger un document expliquant en quelques lignes comment vo
 ## MapReduce avec Eclipse
 
 Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
-1. Décompressez l'archive en conservant le dossier racine `TP_HMIN122M-hadoop/`.
-2. Dans le menu file, créez un nouveau Maven projet » important le `pom.xml` du projet.
+1. Dans le menu file, importer un nouveau Maven projet en utilisant le `pom.xml` du projet.
 
 Maintenant, vous pouvez tester le programme `src/WordCount.java` à partir d’Eclipse (voir le menu "Run", ou faire `CTRL+F11` pour exécuter le fichier source courant, il est possible de lancer le debugger avec `F11`).
 
