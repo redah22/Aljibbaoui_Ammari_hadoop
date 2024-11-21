@@ -1,93 +1,143 @@
-# EDBD-TP-MAP_REDUCE
+## Ressources
+
+- [MR1] MapReduce: Simplified Data Processing on Large Clusters - Jeffrey Dean and Sanjay Ghemawat
+- [MR2] Apache Hadoop http://hadoop.apache.org/
+- [MR3] Hadoop: the definitive guide (http://grut-computing.com/HadoopBook.pdf)
+
+## Avant commencer
+
+La programmation en Map-Reduce utilise le langage Java - avec ses avantages et inconvénients. Il est ainsi indispensable d'effectuer ce travail en binômes, de rester bien concentrés pour bien comprendre la cause des bogues (souvent ce seront des problèmes de typage ou nommage des ressources) et ne pas perdre du temps.  
+Il est vivement conseillé d'utiliser l'IDE Eclipse pour réaliser ce TP. L'archive dont vous disposerez à été pensée pour être facilement intégrée avec cet environnement de développement. Nous détaillerons la procédure de préparation de votre environnement pour cet IDE.
+
+## Format du rendu
+
+Il est demandé de rédiger un document expliquant en quelques lignes comment vous avez répondu à chaque question du TP. Il est important de mettre en évidence juste les points les plus importants vous ayant permis de répondre à la question. Le code Java produit est également à rendre, mais dans une archive `.zip`.
+
+## Télécharger l'archive TP_HMIN122M-hadoop.zip
+
+[TP_HMIN122M-hadoop.zip](https://www.dropbox.com/s/d68l5r2dntyr6h9/TP_HMIN122M-hadoop.zip?dl=0)
+
+## MapReduce avec Eclipse
+
+Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
+
+1. Décompressez l'archive en conservant le dossier racine `TP_HMIN122M-hadoop/`.
+2. Dans le menu file, créez un nouveau « java projet » (dans java).
+3. Décochez la case "Use default location".
+4. Dans le champ "location" sélectionnez le chemin vers votre dossier `TP_HMIN122M-hadoop/`.
+5. Cliquez sur "next".
+6. Puis cliquez sur l'onglet « Libraries », et assurez-vous qu'Eclipse détecte bien 7 librairies en `.jar` dans "Classpath".  
+   - Si ce n'est pas le cas, cliquez sur « Add external JARs » et naviguez pour vous rendre dans le dossier `TP_HMIN122M-hadoop/lib-dev`, puis ajoutez-y tous les `.jar` qui y sont présents.
+7. Cliquez sur « finish » pour créer le projet.
+
+Maintenant, vous pouvez tester le programme `src/WordCount.java` à partir d’Eclipse (voir le menu "Run", ou faire `CTRL+F11` pour exécuter le fichier source courant, il est possible de lancer le debugger avec `F11`).
+
+Après chaque exécution, les résultats sont enregistrés dans des sous-dossiers `output/wordCount-xxxx`. En cliquant sur « Refresh » (ou `F5` dans le Package Explorer) vous pouvez voir les fichiers de résultats dans Eclipse. Vous pouvez aussi les voir en allant explorer directement le dossier via l'explorateur de fichiers du système.
+
+## Installation alternative
+
+En cas de difficulté avec la première méthode, voici une alternative.
+
+1. Il est possible de directement charger le projet à partir de l'archive.
+2. Dans le menu file, cliquez sur "Open projects from File System".
+3. Cliquez sur "Archive...".
+4. Sélectionnez `TP_HMIN122M-hadoop.zip`, puis cliquez sur "OK".
+5. Dans la liste "Folder" qui s'affiche : désélectionnez la première ligne : `TP_HMIN122M-hadoop.zip_expanded`.
+6. Cliquez sur "Finish".
+
+Le projet `TP_HMIN122M-hadoop` s'ajoutera alors dans la fenêtre "Project Explorer". Les fichiers sur le disque seront localisés à la racine de votre workspace, vous pouvez les retrouver en faisant : clic droit sur votre projet → "show in" → "System Explorer".
+
+## Problème sur les nouveaux postes informatique
+
+L'exception levée sur les nouveaux postes informatiques est due au nouveau mécanisme d'authentification de l'UM, où votre nom utilisateur correspond à votre adresse e-mail. Kerberos, le protocole d'authentification utilisé par Hadoop, utilise des règles différentes pour les adresses email.
+
+La solution est de modifier votre nom utilisateur lors de l'exécution du programme. Pour ce faire, il suffit d'ajouter la variable d'environnement `HADOOP_USER_NAME` avant l'exécution du programme.  
+Le plus simple est de l'ajouter directement via Eclipse où l'on va modifier la configuration à l'exécution :
+
+1. Faites un clic droit sur la racine de votre projet, situé dans l'onglet à droite.
+2. Suivez "Run as" → "Run Configurations".
+3. Allez à l'onglet "Environment".
+4. Cliquez sur "New...".
+   - Name : `HADOOP_USER_NAME`
+   - Value : `user`
+5. Exécutez le programme WordCount et vérifiez que tout fonctionne.
+
+## Bug de Hadoop sous Windows
+
+L'utilisation de Hadoop sous Windows entraîne la levée d'une exception de type IOException (Failed to set permissions of path: `\tmp\hadoop-user\mapred\staging\user722309568\.staging to 0700`). C'est un bug connu de Hadoop ([cf. HADOOP-7682](https://issues.apache.org/jira/browse/HADOOP-7682)), qu'il est possible de résoudre de la manière suivante :
+
+1. Télécharger le jar suivant [patch-hadoop_7682-1.0.x-win/downloads](https://github.com/congainc/patch-hadoop_7682-1.0.x-win/downloads).
+2. Déplacer le jar dans `TP_HMIN122M-hadoop/lib-dev`.
+3. Ajouter le `.jar` au build path :
+   - Dans le Package Explorer, clic droit sur le projet → "Build Path" → "Configure Build Path" → "Libraries" → "Add external jars".
+   - Ajouter le `.jar` précédemment téléchargé.
+4. Changer une valeur de la configuration du job avec la méthode suivante :
+   ```java
+   conf.set("fs.file.impl", "com.conga.services.hadoop.patch.HADOOP_7682.WinLocalFileSystem");
 
 
+Où `conf` est l'objet `Configuration` envoyé au job lors de sa création.
 
-## Getting started
+5. Exécuter le programme et vérifier son bon fonctionnement.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## FAQ
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+**Le log dans la sortie standard est illisible. Je ne comprends pas ce que fait mon programme Map-Reduce !**  
+Réponse : Le programme lit les fichiers contenus dans le répertoire `input-wordCount/`, puis effectue un comptage des mots (vérifiez-le !).
 
-## Add your files
+### Statistiques importantes lors de l'exécution d'un job Hadoop :
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- **Map input records** : Le nombre de couples clé-valeur traitées avec appels à la fonction `map`.
+- **Map output records** : Le nombre de couples clé-valeur produites par des appels à la fonction `map`.
+- **Reduce input records** : Le nombre de couples clé-valeur traitées avec appels à la fonction `reduce`. Typiquement égal à `Map output records`, mais plus petit si certaines optimisations sont activées.
+- **Reduce input groups** : Le nombre de clés distinctes traitées avec appels à la fonction `reduce`.
+- **Reduce output records** : Le nombre de couples clé-valeur produites par des appels à la fonction `reduce`.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.etu.umontpellier.fr/p00000013857/edbd-tp-map_reduce.git
-git branch -M main
-git push -uf origin main
-```
+### Exemple HadoopPoem
 
-## Integrate with your tools
+- **Input** : Texte sur 17 lignes composé de 72 mots dont 59 distincts.
+- **Map input records** : 17 (une par ligne).
+- **Map output records** : 72 (une par mot).
+- **Reduce input records** : 72.
+- **Reduce input groups** : 59 (mots distincts).
+- **Reduce output records** : 59 (calcul du nombre d’occurrences de chaque mot).
 
-- [ ] [Set up project integrations](https://gitlab.etu.umontpellier.fr/p00000013857/edbd-tp-map_reduce/-/settings/integrations)
+**Où sont les résultats de mon programme Map-Reduce ?**  
+Voir le répertoire `output/wordCount-xxxx`.
 
-## Collaborate with your team
+**Y a-t-il de la parallélisation à l'état actuel ?**  
+Non, on utilise Hadoop en mode Standalone pour ce TP (les plus courageux peuvent essayer la version "pseudo-distributed").
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+**Qu'est ce qu'on fait maintenant ?**  
+Modifiez les programmes fournis pour implémenter les traitements ci-dessous. Comprenez d'abord le code.
 
-## Test and Deploy
+**Important : Comment puis-je déboguer mon programme ?**  
+Vous disposez d'un logger via la variable de classe `LOG`. Ces messages sont aussi enregistrés dans `TP_HMIN122M-hadoop/out.log`. Utilisez également le debugger d’Eclipse (Run/Debug ou `F11`).
 
-Use the built-in continuous integration in GitLab.
+---
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+## Exercices
 
-***
+### Exercice 0 - WordCount
+Tester le programme WordCount.
 
-# Editing this README
+### Exercice 1 - WordCount + Filter
+Modifier la fonction reduce du programme WordCount.java pour afficher uniquement les mots ayant un nombre d’occurrences supérieur ou égal à deux.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+### Exercice 3 - Group-By
+Implémenter un opérateur de regroupement sur l'attribut `Customer-ID` dans GroupBy.java.  
+Les données sont dans `input-groupBy` et doivent calculer le total des profits (`Profit`) par client.
 
-## Suggestions for a good README
+### Exercice 4 - Group-By
+Modifier le programme précédent :
+1. Calculer les ventes par `Date` et `State`.
+2. Calculer les ventes par `Date` et `Category`.
+3. Calculer par commande :
+   - Le nombre de produits distincts achetés.
+   - Le nombre total d'exemplaires.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### Exercice 5 - Join
+Créer une classe Join.java pour joindre les informations des clients et commandes dans `input-join`.  
+Restituer les couples `(CUSTOMERS.name, ORDERS.comment)`.
 
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+**Note :** Copier les valeurs de l'itérateur dans un tableau temporaire et utiliser deux boucles imbriquées pour effectuer la jointure.
