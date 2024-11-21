@@ -1,3 +1,5 @@
+## Il est important de lire tout le document.
+
 ## Ressources
 
 - [MR1] MapReduce: Simplified Data Processing on Large Clusters - Jeffrey Dean and Sanjay Ghemawat
@@ -20,6 +22,16 @@ Il est demandé de rédiger un document expliquant en quelques lignes comment vo
 ## MapReduce avec Eclipse
 
 Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
+1. Décompressez l'archive en conservant le dossier racine `TP_HMIN122M-hadoop/`.
+2. Dans le menu file, créez un nouveau Maven projet » important le `pom.xml` du projet.
+
+Maintenant, vous pouvez tester le programme `src/WordCount.java` à partir d’Eclipse (voir le menu "Run", ou faire `CTRL+F11` pour exécuter le fichier source courant, il est possible de lancer le debugger avec `F11`).
+
+Après chaque exécution, les résultats sont enregistrés dans des sous-dossiers `output/wordCount-xxxx`. En cliquant sur « Refresh » (ou `F5` dans le Package Explorer) vous pouvez voir les fichiers de résultats dans Eclipse. Vous pouvez aussi les voir en allant explorer directement le dossier via l'explorateur de fichiers du système.
+
+## MapReduce avec Eclipse - (Alternative 1)
+
+Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
 
 1. Décompressez l'archive en conservant le dossier racine `TP_HMIN122M-hadoop/`.
 2. Dans le menu file, créez un nouveau « java projet » (dans java).
@@ -30,13 +42,9 @@ Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
    - Si ce n'est pas le cas, cliquez sur « Add external JARs » et naviguez pour vous rendre dans le dossier `TP_HMIN122M-hadoop/lib-dev`, puis ajoutez-y tous les `.jar` qui y sont présents.
 7. Cliquez sur « finish » pour créer le projet.
 
-Maintenant, vous pouvez tester le programme `src/WordCount.java` à partir d’Eclipse (voir le menu "Run", ou faire `CTRL+F11` pour exécuter le fichier source courant, il est possible de lancer le debugger avec `F11`).
+## Installation (Alternative 2)
 
-Après chaque exécution, les résultats sont enregistrés dans des sous-dossiers `output/wordCount-xxxx`. En cliquant sur « Refresh » (ou `F5` dans le Package Explorer) vous pouvez voir les fichiers de résultats dans Eclipse. Vous pouvez aussi les voir en allant explorer directement le dossier via l'explorateur de fichiers du système.
-
-## Installation alternative
-
-En cas de difficulté avec la première méthode, voici une alternative.
+En cas de difficulté, voici une autre alternative.
 
 1. Il est possible de directement charger le projet à partir de l'archive.
 2. Dans le menu file, cliquez sur "Open projects from File System".
