@@ -15,10 +15,6 @@ Il est vivement conseillé d'utiliser l'IDE Eclipse pour réaliser ce TP. L'arch
 
 Il est demandé de rédiger un document expliquant en quelques lignes comment vous avez répondu à chaque question du TP. Il est important de mettre en évidence juste les points les plus importants vous ayant permis de répondre à la question. Le code Java produit est également à rendre, mais dans une archive `.zip`.
 
-## Télécharger l'archive TP_HMIN122M-hadoop.zip
-
-[TP_HMIN122M-hadoop.zip](https://www.dropbox.com/s/d68l5r2dntyr6h9/TP_HMIN122M-hadoop.zip?dl=0)
-
 ## MapReduce avec Eclipse
 
 Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
@@ -29,6 +25,8 @@ Maintenant, vous pouvez tester le programme `src/WordCount.java` à partir d’E
 Après chaque exécution, les résultats sont enregistrés dans des sous-dossiers `output/wordCount-xxxx`. En cliquant sur « Refresh » (ou `F5` dans le Package Explorer) vous pouvez voir les fichiers de résultats dans Eclipse. Vous pouvez aussi les voir en allant explorer directement le dossier via l'explorateur de fichiers du système.
 
 ## MapReduce avec Eclipse - (Alternative 1)
+
+Télécharger l'archive [TP_HMIN122M-hadoop.zip](https://www.dropbox.com/s/d68l5r2dntyr6h9/TP_HMIN122M-hadoop.zip?dl=0)
 
 Voici les étapes pour configurer Eclipse afin de pouvoir utiliser Map-Reduce :
 
@@ -69,7 +67,15 @@ Le plus simple est de l'ajouter directement via Eclipse où l'on va modifier la 
    - Value : `user`
 5. Exécutez le programme WordCount et vérifiez que tout fonctionne.
 
+
+## Problèmes de securité. Forcer l'utilisation de Java 11.
+
+- Si vous utiliséz IntelliJ, vous devez vous assurer d'utiliser Java 11. Pour ce faire configurer l'option `Build and Run` avec valeur `Bundle` ; cela permet d'utiliser la version spécifée dans le `pom.xml`.
+![Configuration Exécution](IntelliJ-SetJavaBundle.png)
+
 ## Bug de Hadoop sous Windows
+
+(critique, on déconseille l'utilisation de Windows)
 
 L'utilisation de Hadoop sous Windows entraîne la levée d'une exception de type IOException (Failed to set permissions of path: `\tmp\hadoop-user\mapred\staging\user722309568\.staging to 0700`). C'est un bug connu de Hadoop ([cf. HADOOP-7682](https://issues.apache.org/jira/browse/HADOOP-7682)), qu'il est possible de résoudre de la manière suivante :
 
