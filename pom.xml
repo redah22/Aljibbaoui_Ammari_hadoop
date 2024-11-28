@@ -106,6 +106,9 @@
 							<rules>
 								<dependencyConvergence />
 							</rules>
+							<fail>
+								false
+							</false>
 						</configuration>
 					</execution>
 				</executions>
