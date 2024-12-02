@@ -137,11 +137,11 @@ Tester le programme WordCount.
 ### Exercice 1 - WordCount + Filter
 Modifier la fonction reduce du programme WordCount.java pour afficher uniquement les mots ayant un nombre d’occurrences supérieur ou égal à deux.
 
-### Exercice 3 - Group-By
+### Exercice 2 - Group-By
 Implémenter un opérateur de regroupement sur l'attribut `Customer-ID` dans GroupBy.java.  
 Les données sont dans `input-groupBy` et doivent calculer le total des profits (`Profit`) par client.
 
-### Exercice 4 - Group-By
+### Exercice 3 - Group-By
 Modifier le programme précédent :
 1. Calculer les ventes par `Date` et `State`.
 2. Calculer les ventes par `Date` et `Category`.
@@ -149,7 +149,7 @@ Modifier le programme précédent :
    - Le nombre de produits distincts achetés.
    - Le nombre total d'exemplaires.
 
-### Exercice 5 - Join
+### Exercice 4 - Join
 Créer une classe Join.java pour joindre les informations des clients et commandes dans `input-join`.  
 Restituer les couples `(CUSTOMERS.name, ORDERS.comment)`.
 
