@@ -1,24 +1,48 @@
 
-### Exercice 6 - GroupBy + Join
+### Exercice 0 - WordCount
+Tester le programme WordCount.
+
+### Exercice 1 - WordCount + Filter
+Modifier la fonction reduce du programme WordCount.java pour afficher uniquement les mots ayant un nombre d’occurrences supérieur ou égal à deux.
+
+### Exercice 2 - Group-By
+Implémenter un opérateur de regroupement sur l'attribut `Customer-ID` dans GroupBy.java.  
+Les données sont dans `input-groupBy` et doivent calculer le total des profits (`Profit`) par client.
+
+### Exercice 3 - Group-By
+Modifier le programme précédent :
+1. Calculer les ventes par `Date` et `State`.
+2. Calculer les ventes par `Date` et `Category`.
+3. Calculer par commande :
+   - Le nombre de produits distincts achetés.
+   - Le nombre total d'exemplaires.
+
+### Exercice 4 - Join
+Créer une classe Join.java pour joindre les informations des clients et commandes dans `input-join`.  
+Restituer les couples `(CUSTOMERS.name, ORDERS.comment)`.
+
+**Note :** Copier les valeurs de l'itérateur dans un tableau temporaire et utiliser deux boucles imbriquées pour effectuer la jointure.
+
+### Exercice 5 - GroupBy + Join
 
 Pour le fichier `superstore.csv`, calculer le montant total des achats faits par chaque client.  
 **Le programme doit restituer des couples** `(CUSTOMERS.name, SUM(totalprice))`.
 
 ---
 
-### Exercice 7 - Suppression des doublons (DISTINCT)
+### Exercice 6 - Suppression des doublons (DISTINCT)
 
 Donner la liste des clients (sans doublons) présents dans le dataset du répertoire `input-groupBy`.
 
 ---
 
-### Exercice 8 - MR <-> SQL
+### Exercice 7 - MR <-> SQL
 
 Donner le code SQL équivalent aux traitements Map/Reduce implémentés pour les questions 4, 5, 6 et 7.
 
 ---
 
-### Exercice 9 - TAM
+### Exercice 8 - TAM
 
 Rendez-vous à l'adresse : [offre-de-transport-tam-en-temps-reel](http://data.montpellier3m.fr/dataset/offre-de-transport-tam-en-temps-reel)  
 Télécharger le fichier `TAM_MMM_OffreJour.zip` contenant la prévision du service de tramway pour la journée.
@@ -31,7 +55,7 @@ Répondre aux questions suivantes :
 
 ---
 
-### Exercice 10 - Tri
+### Exercice 9 - Tri
 
 Hadoop trie les clés des groupes en ordre lexicographique ascendant pendant la phase de shuffling. Modifier la méthode de tri.  
 1. Trier les commandes clients du fichier `superstore.csv` par date d’expédition en ordre croissant, puis décroissant.  
@@ -39,7 +63,7 @@ Hadoop trie les clés des groupes en ordre lexicographique ascendant pendant la 
 
 ---
 
-### Exercice 11 - Requêtes Top-k
+### Exercice 10 - Requêtes Top-k
 
 Modifier la classe `TopkWordCount.java` pour répondre aux requêtes suivantes :  
 1. Les k premières lignes triées par profit (ordre décroissant).  
@@ -47,7 +71,7 @@ Modifier la classe `TopkWordCount.java` pour répondre aux requêtes suivantes :
 
 ---
 
-### Exercice 12 - TAM (suite question 9)
+### Exercice 11 - TAM (suite question 9)
 
 Répondre aux questions suivantes :  
 - Quelles sont les 10 stations les plus desservies par les trams ?  
@@ -56,7 +80,7 @@ Répondre aux questions suivantes :
 
 ---
 
-### Exercice 13 - Taxis New York
+### Exercice 12 - Taxis New York
 
 Rendez-vous à l'adresse : [trip_record_data](http://www.nyc.gov/html/tlc/html/about/trip_record_data.shtml)  
 Télécharger les données des taxis jaunes pour janvier 2018. Répondre aux questions suivantes :  
@@ -72,7 +96,7 @@ Télécharger les données des taxis jaunes pour janvier 2018. Répondre aux que
 
 ---
 
-### Exercice 14 - Jointure par hachage
+### Exercice 13 - Jointure par hachage
 
 Une technique classique de jointure en Map/Reduce consiste à découper l'évaluation en sous-tâches exécutables en parallèle.  
 Exemple :
