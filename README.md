@@ -1,5 +1,3 @@
-## Avant-props
-
 Ce TP a pour objectif de vous familiariser avec les plateformes de Big Data afin de comprendre les principes fondamentaux du fonctionnement de ces systèmes reposant sur une parallélisation massive.
 En réalisant ce TP, vous serez mieux préparés à tirer pleinement parti des séminaires industriels sur le Big Data, dans lesquels ces concepts sont évoqués.
 Enfin, les exercices proposés constituent également une bonne préparation pour l'examen ;-)
