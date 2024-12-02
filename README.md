@@ -8,8 +8,7 @@
 
 ## Avant commencer
 
-La programmation en Map-Reduce utilise le langage Java - avec ses avantages et inconvénients. Il est ainsi indispensable d'effectuer ce travail en binômes, de rester bien concentrés pour bien comprendre la cause des bogues (souvent ce seront des problèmes de typage ou nommage des ressources) et ne pas perdre du temps.  
-Il est vivement conseillé d'utiliser l'IDE Eclipse pour réaliser ce TP. L'archive dont vous disposerez à été pensée pour être facilement intégrée avec cet environnement de développement. Nous détaillerons la procédure de préparation de votre environnement pour cet IDE.
+La programmation en Map-Reduce utilise le langage Java - avec ses avantages et inconvénients. Il est ainsi indispensable d'effectuer ce travail en binômes, de rester bien concentrés pour bien comprendre la cause des bogues (souvent ce seront des problèmes de typage ou nommage des ressources).  
 
 ## Format du rendu
 
