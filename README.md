@@ -101,7 +101,7 @@ SPOOL OFF;
 ```
 
 
-## Exercices facultatifs, mais utiles pour la préparation à l'examen 
+## Un lien vers des exercices facultatifs, mais utiles pour la préparation à l'examen 
 
 Vous trouverez [ici](more/advanced_questions.md) une liste de question que vous pouvez utiliser pour travailler plus en profondeur la programmation en map/reduce.
 
