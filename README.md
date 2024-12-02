@@ -64,7 +64,7 @@ Vous disposez d'un logger via la variable de classe `LOG`. Ces messages sont aus
 
 ---
 
-## Exercices
+## Exercices de préparation - Partie 2
 
 ### Exercice 0 - WordCount
 Tester le programme WordCount.
@@ -89,3 +89,22 @@ Créer une classe Join.java pour joindre les informations des clients et command
 Restituer les couples `(CUSTOMERS.name, ORDERS.comment)`.
 
 **Note :** Copier les valeurs de l'itérateur dans un tableau temporaire et utiliser deux boucles imbriquées pour effectuer la jointure.
+
+
+## Exercices - Partie 2  
+
+À l'aide de map/reduce, implementer trois (3) requêtes analytiques proposées pour le premier datamart (aspect principal) de votre projet et deux (2) requêtes analytiques proposées pour le deuxième datamart (aspect secondaire).
+
+Vous pouvez rapidement extraire vos données de votre instance Oracle avec les commandes suivantes que vous pouvez adapter pour vos tables. 
+
+`sql
+SET MARKUP CSV ON;
+SPOOL change_this_table_name.csv;
+SELECT * FROM change_this_table_name;
+SPOOL OFF;
+`
+
+
+
+
+
