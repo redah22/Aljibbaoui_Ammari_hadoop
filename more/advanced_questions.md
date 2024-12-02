@@ -1,3 +1,4 @@
+Voici des questions que vous pouvez utiliser pour travailler plus en profondeur la programmation en map/reduce.
 
 ### Exercice 0 - WordCount
 Tester le programme WordCount.
