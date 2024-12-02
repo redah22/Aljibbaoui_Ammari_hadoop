@@ -25,7 +25,7 @@ D'autres possibilités d'installation sont indiquées [ici](doc/install.md).
 ## FAQ
 
 **Le log dans la sortie standard est illisible. Je ne comprends pas ce que fait mon programme Map-Reduce !**  
-Réponse : Le programme lit les fichiers contenus dans le répertoire `input-wordCount/`, puis effectue un comptage des mots (vérifiez-le !).
+Réponse : Le programme lit les fichiers contenus dans le répertoire `input-wordCount/`, puis effectue un comptage des mots qui est sauvegardé dans le repertoire `output` (vérifiez-le !).
 
 ### Statistiques importantes lors de l'exécution d'un job Hadoop :
 
