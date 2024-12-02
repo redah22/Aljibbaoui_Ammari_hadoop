@@ -31,8 +31,6 @@ Problèmes avec IntelliJ : IntelliJ pourrait utiliser une JVM différente de cel
 
 Problèmes avec Windows : avec la version `v1.2` manquent des fonctionnalités pour l'écriture sur disque via Hadoop. Pour pallier à ce problème, testez le projet avec la `v3.6`.
 
-D'autres possibilités d'installation sont indiquées [ici](doc/install.md).
-
 ## FAQ
 
 **Le log dans la sortie standard est illisible. Je ne comprends pas ce que fait mon programme Map-Reduce !**  
@@ -69,7 +67,7 @@ Vous disposez d'un logger via la variable de classe `LOG`. Ces messages sont aus
 
 ---
 
-## Exercices de préparation - Partie 2
+## Exercices de préparation - Partie 1
 
 ### Exercice 0 - WordCount
 Tester le programme WordCount.
