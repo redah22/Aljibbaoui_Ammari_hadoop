@@ -108,7 +108,7 @@
 							</rules>
 							<fail>
 								false
-							</false>
+							</fail>
 						</configuration>
 					</execution>
 				</executions>
