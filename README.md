@@ -22,9 +22,9 @@ Pour faire face aux différents soucis rencontres dans les différents systèmes
 
 Essayez d'importer et tester le fonctionnement du projet avec la `v1.2`. Si tout va bien, passez à la section suivante.
 
-Problèmes avec IntelliJ : IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le pom. Dans ce cas, selectionner Java 11 dans le menu File > Project Structure > Project > Project SDK.
+Problèmes avec IntelliJ : IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK.
 
-Problèmes avec Windows : manque de fonctionnalités pour écriture sur disque via Hadoop. Essayez le projet avec la `v3.6`.
+Problèmes avec Windows : avec la version `v1.2` manquent des fonctionnalités pour l'écriture sur disque via Hadoop. Pour pallier à ce problème, testez le projet avec la `v3.6`.
 
 D'autres possibilités d'installation sont indiquées [ici](doc/install.md).
 
