@@ -1,5 +1,8 @@
+
 Ce TP a pour objectif de vous familiariser avec les plateformes de Big Data afin de comprendre les principes fondamentaux du fonctionnement de ces systèmes reposant sur une parallélisation massive.
+
 En réalisant ce TP, vous serez mieux préparés à tirer pleinement parti des séminaires industriels sur le Big Data, dans lesquels ces concepts sont évoqués.
+
 Enfin, les exercices proposés constituent également une bonne préparation pour l'examen ;-)
 
 
@@ -99,7 +102,6 @@ SELECT * FROM change_this_table_name;
 -- dernière commande avant de fermer la connexion
 SPOOL OFF;
 ```
-
 
 ## Un lien vers des exercices facultatifs, mais utiles pour la préparation à l'examen 
 
