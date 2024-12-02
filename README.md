@@ -97,12 +97,17 @@ Restituer les couples `(CUSTOMERS.name, ORDERS.comment)`.
 
 Vous pouvez rapidement extraire vos données de votre instance Oracle avec les commandes suivantes que vous pouvez adapter pour vos tables. 
 
-`sql
+```sql
+-- ouvrir la connexion
 SET MARKUP CSV ON;
+
+-- répeter pour chaque table à exporter
 SPOOL change_this_table_name.csv;
 SELECT * FROM change_this_table_name;
+
+-- dernière commande avant de fermer la connexion
 SPOOL OFF;
-`
+```
 
 
 
