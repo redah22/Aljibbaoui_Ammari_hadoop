@@ -36,22 +36,10 @@ Problèmes avec Windows : avec la version `v1.2` manquent des fonctionnalités p
 **Le log dans la sortie standard est illisible. Je ne comprends pas ce que fait mon programme Map-Reduce !**  
 Réponse : Le programme lit les fichiers contenus dans le répertoire `input-wordCount/`, puis effectue un comptage des mots qui est sauvegardé dans le repertoire `output` (vérifiez-le !).
 
-### Statistiques importantes lors de l'exécution d'un job Hadoop :
+**Qu'indiquent les statistiques d'éxécution du programme Map-Reduce ?**  
 
-- **Map input records** : Le nombre de couples clé-valeur traitées avec appels à la fonction `map`.
-- **Map output records** : Le nombre de couples clé-valeur produites par des appels à la fonction `map`.
-- **Reduce input records** : Le nombre de couples clé-valeur traitées avec appels à la fonction `reduce`. Typiquement égal à `Map output records`, mais plus petit si certaines optimisations sont activées.
-- **Reduce input groups** : Le nombre de clés distinctes traitées avec appels à la fonction `reduce`.
-- **Reduce output records** : Le nombre de couples clé-valeur produites par des appels à la fonction `reduce`.
+Voir les détails [ici](doc/stats.md)
 
-### Exemple HadoopPoem
-
-- **Input** : Texte sur 17 lignes composé de 72 mots dont 59 distincts.
-- **Map input records** : 17 (une par ligne).
-- **Map output records** : 72 (une par mot).
-- **Reduce input records** : 72.
-- **Reduce input groups** : 59 (mots distincts).
-- **Reduce output records** : 59 (calcul du nombre d’occurrences de chaque mot).
 
 **Où sont les résultats de mon programme Map-Reduce ?**  
 Voir le répertoire `output/wordCount-xxxx`.
