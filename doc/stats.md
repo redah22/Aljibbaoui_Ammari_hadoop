@@ -37,6 +37,8 @@ Voici les statistiques les plus importantes (pour démarrer) visualisées lors d
 - **Reduce output records**  
   - Le nombre de couples clé-valeur produits par des appels à la fonction reduce.
 
+---
+
 L'exemple hadoopPoem contient un texte sur **17** lignes composé de **72** mots dont **59** sont distincts.  
 Un appel à la fonction map est réalisé pour chaque ligne du fichier. Nous avons donc :  
 - **Map input records = 17**  
