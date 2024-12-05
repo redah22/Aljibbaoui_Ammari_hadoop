@@ -24,15 +24,21 @@ Il est demandé de rédiger un document expliquant en quelques lignes comment vo
 
 ## Installation
 
-Let TP a été longuement testé avec Eclipse et Linux/OSX, et est conçu pour tourner sur les ordinateurs de la faculté.
+Disclaimer : TP fonctionnel pour les configuratinos suivantes :
 
-Pour faire face aux différents soucis rencontres dans les différents systèmes d'exploitation (eg Windows) et IDE (IntelliJ, Eclipse) deux versions du TP sont mises à disposition.
+1. Ordinateurs de la faculté, Ubuntu (Eclipse, IntelliJ)
+2. Ordinateurs personnels, Linux ou OSX (Eclipse, IntelliJ)
 
-Essayez d'importer et tester le fonctionnement du projet avec la `v1.2`. Si tout va bien, passez à la section suivante.
+Pour faire face aux différents soucis rencontres dans les différents systèmes d'exploitation et IDE deux versions du TP sont mises à disposition. Essayez d'importer et tester le fonctionnement du projet avec la `v1.2`. Si tout va bien, passez à la section suivante.
 
-Problèmes avec IntelliJ : IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK.
+Troubleshooting :
+- Problème avec `Kerberos` : ajouter variable d'environnement `HADOOP_USER_NAME`, voir [ici](doc/install.md)
+- Problème `security manager not active' avec IntelliJ. L'IDE IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK. forcer l'utilisation de Java 11, voir [ici](doc/install.md)
+- Problème `file path does not exist' : changer les chemins des fichiers correspondant aux variables `INPUT_PATH` et `OUTPUT_PATH` dans `WordCount.java` 
 
-Problèmes avec Windows : avec la version `v1.2` manquent des fonctionnalités pour l'écriture sur disque via Hadoop. Pour pallier à ce problème, testez le projet avec la `v3.6`.
+Windows n'est pas supporté. Vous pouvez essayer d'exécuter une machine virtuelle Linux depuis votre système Windows. Une altre possibilité est d'installer Hadoop sous windows.
+
+
 
 ## FAQ
 
