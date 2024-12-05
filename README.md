@@ -36,7 +36,7 @@ Troubleshooting :
 - Problème `security manager not active' avec IntelliJ. L'IDE IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK. forcer l'utilisation de Java 11, voir [ici](doc/install.md)
 - Problème `file path does not exist' : changer les chemins des fichiers correspondant aux variables `INPUT_PATH` et `OUTPUT_PATH` dans `WordCount.java` 
 
-Windows n'est pas supporté. Vous pouvez essayer d'exécuter une machine virtuelle Linux depuis votre système Windows. Une altre possibilité est d'installer Hadoop sous windows.
+(Apologies) Windows n'est pas supporté. Vous pouvez essayer d'exécuter une machine virtuelle Linux depuis votre système Windows. Une altre possibilité est d'installer Hadoop sous Windows.
 
 
 
