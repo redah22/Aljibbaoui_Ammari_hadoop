@@ -137,3 +137,5 @@ WHERE d.price = 50;
 -- Display Execution Plan Again
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 ```
+
+**Maintenant c'est à vous !**  Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index.
