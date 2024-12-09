@@ -3,11 +3,7 @@ Index BitMap
 
 Les scripts mis à disposition permettent de familiariser avec la déclaration d'indexes de type bitmap et join-bitmap, ainsi qu'avec leur utilisation par l'optimiseur Oracle.
 
-Travail à faire : 
-1. Exécuter les différentes parties du script et comprendre ce qui se passe dans chaque partie.
-
-Pour aller plus loin :
-2. Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index
+L'objectif ici est d'exécuter les différentes parties du script et comprendre ce qui se passe dans chaque partie.
 
 
 ## Premièr type d'index : Bitmap (no join)
