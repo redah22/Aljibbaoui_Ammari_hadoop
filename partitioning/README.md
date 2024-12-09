@@ -48,7 +48,7 @@ Ready to go.
 
 ## 1. Partitionnement par Lignes 
 
-Le partitionnement par **LIST** consiste à séparer les données en partitions basées sur des valeurs spécifiques.
+Le partitionnement par lignes consiste à séparer les données en partitions basées sur des valeurs spécifiques.
 
 ### Création de la Table Clients
 ```sql
@@ -202,7 +202,39 @@ COMMIT;
 
 ---
 
-## 3. Partitionnement Hybride (LIST + Colonnes)
+## 3. Partitionnement Hybride (Lignes + Colonnes)
+
+Nous allons devoir d'abord nettoyer la base.
+
+```sql
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients_Statique CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients_Dynamique CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP VIEW Clients_Complet';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+```
 
 ### Création des Tables Partitionnées
 #### Clients_Statique Partitionné
@@ -236,6 +268,27 @@ PARTITION BY LIST (Pays) (
     PARTITION partition_autres VALUES (DEFAULT)
 );
 ```
+
+Ajoutons quelques données.
+
+```sql
+-- 3. Insertion de données dans Clients_Statique
+INSERT INTO Clients_Statique VALUES (1, 'Alice Dupont', TO_DATE('2022-01-10', 'YYYY-MM-DD'), 'France');
+INSERT INTO Clients_Statique VALUES (2, 'John Smith', TO_DATE('2021-05-15', 'YYYY-MM-DD'), 'USA');
+INSERT INTO Clients_Statique VALUES (3, 'Marie Curie', TO_DATE('2023-03-20', 'YYYY-MM-DD'), 'Canada');
+INSERT INTO Clients_Statique VALUES (4, 'Carlos Santos', TO_DATE('2022-11-05', 'YYYY-MM-DD'), 'Portugal');
+INSERT INTO Clients_Statique VALUES (5, 'Sophie Martin', TO_DATE('2021-12-20', 'YYYY-MM-DD'), 'France');
+
+COMMIT;
+
+-- 4. Insertion de données dans Clients_Dynamique
+INSERT INTO Clients_Dynamique VALUES (1, '10 rue des Lilas, Paris', 85, 'France');
+INSERT INTO Clients_Dynamique VALUES (2, '123 Main St, New York', 70, 'USA');
+INSERT INTO Clients_Dynamique VALUES (3, '5 avenue des Champs, Montreal', 90, 'Canada');
+INSERT INTO Clients_Dynamique VALUES (4, '50 Rua de Lisboa', 60, 'Portugal');
+INSERT INTO Clients_Dynamique VALUES (5, '8 boulevard Haussmann, Paris', 88, 'France');
+```
+
 
 ### Requêtes de Test
 1. **Cibler une partition spécifique :**

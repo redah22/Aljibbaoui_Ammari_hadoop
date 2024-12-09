@@ -155,6 +155,41 @@ FROM Clients_Complet
 WHERE Indice_Confiance > 70 AND Date_Inscription > TO_DATE('2022-01-01', 'YYYY-MM-DD');
 
 
+--------------------------------------------------------
+-- Partitionnement hybride
+--------------------------------------------------------
+
+-- Cleanup
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients_Statique CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients_Dynamique CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP VIEW Clients_Complet';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+
 -- 1. Création de la table des attributs statiques, partitionnée par pays
 CREATE TABLE Clients_Statique (
     Client_ID NUMBER PRIMARY KEY,
