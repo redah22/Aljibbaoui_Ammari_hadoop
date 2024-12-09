@@ -229,6 +229,24 @@ PARTITION BY LIST (Pays) (
    WHERE Indice_Confiance > 80 AND Date_Inscription > TO_DATE('2022-01-01', 'YYYY-MM-DD');
    ```
 
+Que se passe-t-il dans l'optimiseur ?
+
+```sql
+   EXPLAIN PLAN FOR
+   SELECT * 
+   FROM Clients_Statique PARTITION (partition_france)
+   WHERE Date_Inscription > TO_DATE('2021-01-01', 'YYYY-MM-DD');
+
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+
+   EXPLAIN PLAN FOR
+   SELECT * 
+   FROM Clients_Complet
+   WHERE Indice_Confiance > 80 AND Date_Inscription > TO_DATE('2022-01-01', 'YYYY-MM-DD');
+
+   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+   ```
+
 ---
 
 ## Conclusion
