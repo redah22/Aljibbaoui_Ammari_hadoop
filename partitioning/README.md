@@ -2,7 +2,7 @@
 # Script Oracle : Partitionnement des Données
 
 Ce script explore les différentes méthodes de partitionnement dans Oracle, notamment :
-- **Partitionnement par lignes ** : Organisation des données en fonction des valeurs spécifiques d'une colonne.
+- **Partitionnement par lignes** : Organisation des données en fonction des valeurs spécifiques d'une colonne.
 - **Partitionnement par colonnes** : Division logique des données en tables distinctes.
 - **Partitionnement hybride** : Combinaison des deux approches précédentes.
 
@@ -65,6 +65,7 @@ COMMIT;
   EXPLAIN PLAN FOR
   SELECT * 
   FROM Clients PARTITION (partition_france);
+  
   SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 
   EXPLAIN PLAN FOR
@@ -103,13 +104,31 @@ CREATE TABLE Clients_Dynamique (
 
 ### Insertion des Données
 ```sql
--- Insertion dans Clients_Statique
+-- Insertion des données dans Clients_Statique
 INSERT INTO Clients_Statique VALUES (1, 'Alice Dupont', TO_DATE('2022-01-10', 'YYYY-MM-DD'));
--- Ajoutez les autres lignes ici...
+INSERT INTO Clients_Statique VALUES (2, 'John Smith', TO_DATE('2021-05-15', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (3, 'Marie Curie', TO_DATE('2023-03-20', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (4, 'Carlos Santos', TO_DATE('2022-11-05', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (5, 'Sophie Martin', TO_DATE('2021-12-20', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (6, 'Jane Doe', TO_DATE('2023-02-15', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (7, 'Victor Hugo', TO_DATE('2020-08-05', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (8, 'Liu Wei', TO_DATE('2021-09-30', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (9, 'Emma Watson', TO_DATE('2022-03-12', 'YYYY-MM-DD'));
+INSERT INTO Clients_Statique VALUES (10, 'Akira Yamada', TO_DATE('2021-11-25', 'YYYY-MM-DD'));
 
--- Insertion dans Clients_Dynamique
+COMMIT;
+
+-- Insertion des données dans Clients_Dynamique
 INSERT INTO Clients_Dynamique VALUES (1, '10 rue des Lilas, Paris', 85);
--- Ajoutez les autres lignes ici...
+INSERT INTO Clients_Dynamique VALUES (2, '123 Main St, New York', 70);
+INSERT INTO Clients_Dynamique VALUES (3, '5 avenue des Champs, Montreal', 90);
+INSERT INTO Clients_Dynamique VALUES (4, '50 Rua de Lisboa', 60);
+INSERT INTO Clients_Dynamique VALUES (5, '8 boulevard Haussmann, Paris', 88);
+INSERT INTO Clients_Dynamique VALUES (6, '456 Elm St, Boston', 75);
+INSERT INTO Clients_Dynamique VALUES (7, '12 rue Victor Hugo, Quebec', 95);
+INSERT INTO Clients_Dynamique VALUES (8, '88 Peking Rd, Shanghai', 78);
+INSERT INTO Clients_Dynamique VALUES (9, '100 Baker St, London', 65);
+INSERT INTO Clients_Dynamique VALUES (10, '3 Chome Ginza, Tokyo', 82);
 
 COMMIT;
 ```
@@ -126,6 +145,23 @@ COMMIT;
   SELECT * 
   FROM Clients_Dynamique
   WHERE Indice_Confiance > 80;
+  ```
+
+  Que se passe-t-il dans l'optimiseur ?
+   ```sql
+  EXPLAIN PLAN FOR
+  SELECT * 
+  FROM Clients_Statique
+  WHERE Date_Inscription > TO_DATE('2022-01-01', 'YYYY-MM-DD');
+  
+  SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+
+  EXPLAIN PLAN FOR
+  SELECT * 
+  FROM Clients_Dynamique
+  WHERE Indice_Confiance > 80;
+  
+  SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
   ```
 
 ---
