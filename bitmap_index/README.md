@@ -5,6 +5,8 @@ Les scripts mis à disposition permettent de familiariser avec la déclaration d
 
 Travail à faire : 
 1. Exécuter les différentes parties du script et comprendre ce qui se passe dans chaque partie.
+
+Pour aller plus loin :
 2. Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index
 
 
@@ -93,8 +95,7 @@ WHERE rating = 5 AND gender = 'M';
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 ```
 
-Pour aller plus loin : le script `bitmap_index.sql` présente également la création d'un index bitmap sur la colonne `rating`. 
-
+Pour aller plus loin : le script `bitmap_index.sql` présente également la création d'un index bitmap sur la colonne `rating`. Vous pouvez tester les requêtes et visualiser les plans d'exécution. Vous pouvez aussi donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index.
 
 ## Deuxième type d'index : Join Bitmap
 
@@ -125,10 +126,9 @@ END;
 ```
 
 
-Ensuite, nous allons créer des tables et y mettre quelques données. L'étape d'ajout des données est nécessaire pour que les indexes soient utilisés. En effet, pour des petits volumes de données l'optimiseur pourrait choisir de ne pas les utilisers (ce choix est parfaitement justifié si les données ne sont pas volumineuses). Pour remarquer le véritable effet des indexes sur le temps d'accès aux données il faut travailler avec des volumes de données plus conséquents (à tester sur vos machines personnelles). 
+Ensuite, nous allons créer des tables et y mettre quelques données. L'étape d'ajout de quelques données est nécessaire pour que les indexes soient utilisés. En effet, gardons à l'ésprit le fait que pour des petits volumes de données l'optimiseur pourrait choisir de ne pas  utilisers les index (et ce choix serait parfaitement justifié). 
 
 ```sql
-
 -- Step 1: 
 -- Create the Dimension Table 
 CREATE TABLE Dim_table_product (
@@ -191,7 +191,7 @@ FROM Fact_table_sales f, Dim_table_product d
 WHERE f.product_id = d.product_id;
 ```
 
-Voici un exemple illustré de notre index.
+Voici un exemple illustré de notre index (les valeurs dans les tables sont différentes de celles du script de création fourni, mais donnent une meilleure illustration du cas)
 
 #### Dimension produit
 
@@ -215,7 +215,7 @@ Voici un exemple illustré de notre index.
 
 #### Index bitmap
 
-Voici l'index. Notons la création d'une join-bitmap pour chaque valeur de l'identifiant produit. Par exemple, le produi 102 est utilisé dans deux lignes de la table de faits (correspondants aux ventes `S002` et `S004`) et, par conséquent, son bitmap contient deux bit à `1` aux positions associées à ces lignes.
+Voici l'index. Notons la création d'une join-bitmap pour chaque valeur de l'identifiant produit. Par exemple, le produi `102` est utilisé dans deux lignes de la table de faits (correspondants aux ventes `S002` et `S004`) et, par conséquent, son bitmap contient deux bit à `1` aux positions associées à ces lignes.
 
 | "Corresponding Sale Line on Fact Table" | Product ID = P101 | Product ID = P102 | Product ID = P103 | Product ID = P104 |
 |--------------------------|--------------------|--------------------|--------------------|--------------------|
@@ -269,4 +269,4 @@ WHERE d.price = 50;
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 ```
 
-**Maintenant c'est à vous !**  Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index.
+Pour aller plus loin : **Maintenant c'est à vous !**  Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index.
