@@ -2,7 +2,7 @@
 # Script Oracle : Partitionnement des Données
 
 Ce script explore les différentes méthodes de partitionnement dans Oracle, notamment :
-- **Partitionnement par lignes (LIST)** : Organisation des données en fonction des valeurs spécifiques d'une colonne.
+- **Partitionnement par lignes ** : Organisation des données en fonction des valeurs spécifiques d'une colonne.
 - **Partitionnement par colonnes** : Division logique des données en tables distinctes.
 - **Partitionnement hybride** : Combinaison des deux approches précédentes.
 
@@ -10,7 +10,7 @@ Chaque section du script est accompagnée d'exemples pour tester et comprendre l
 
 ---
 
-## 1. Partitionnement par Lignes (LIST)
+## 1. Partitionnement par Lignes 
 
 Le partitionnement par **LIST** consiste à séparer les données en partitions basées sur des valeurs spécifiques.
 
@@ -35,7 +35,15 @@ PARTITION BY LIST (Pays) (
 ```sql
 INSERT INTO Clients VALUES (1, 'Alice Dupont', '10 rue des Lilas, Paris', 'France', TO_DATE('2022-01-10', 'YYYY-MM-DD'));
 INSERT INTO Clients VALUES (2, 'John Smith', '123 Main St, New York', 'USA', TO_DATE('2021-05-15', 'YYYY-MM-DD'));
--- Ajoutez les autres lignes ici...
+INSERT INTO Clients VALUES (3, 'Marie Curie', '5 avenue des Champs, Montreal', 'Canada', TO_DATE('2023-03-20', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (4, 'Carlos Santos', '50 Rua de Lisboa', 'Portugal', TO_DATE('2022-11-05', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (5, 'Sophie Martin', '8 boulevard Haussmann, Paris', 'France', TO_DATE('2021-12-20', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (6, 'Jane Doe', '456 Elm St, Boston', 'USA', TO_DATE('2023-02-15', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (7, 'Victor Hugo', '12 rue Victor Hugo, Quebec', 'Canada', TO_DATE('2020-08-05', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (8, 'Liu Wei', '88 Peking Rd, Shanghai', 'China', TO_DATE('2021-09-30', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (9, 'Emma Watson', '100 Baker St, London', 'UK', TO_DATE('2022-03-12', 'YYYY-MM-DD'));
+INSERT INTO Clients VALUES (10, 'Akira Yamada', '3 Chome Ginza, Tokyo', 'Japan', TO_DATE('2021-11-25', 'YYYY-MM-DD'));
+
 COMMIT;
 ```
 
@@ -51,6 +59,22 @@ COMMIT;
   FROM Clients
   WHERE Pays IN ('USA', 'Canada');
   ```
+
+- Que se passe-t-il dans l'optimiseur ?
+  ```sql
+  EXPLAIN PLAN FOR
+  SELECT * 
+  FROM Clients PARTITION (partition_france);
+  SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+
+  EXPLAIN PLAN FOR
+  SELECT * 
+  FROM Clients
+  WHERE Pays IN ('USA', 'Canada');
+
+  SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+  ```
+
 
 ---
 
