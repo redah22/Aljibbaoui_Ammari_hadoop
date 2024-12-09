@@ -189,6 +189,41 @@ FROM Fact_table_sales f, Dim_table_product d
 WHERE f.product_id = d.product_id;
 ```
 
+Voici un exemple illustré de notre index.
+
+### Assumed Data for Tables
+
+#### `Dim_table_product`
+
+| product_id | name         | price |
+|------------|--------------|-------|
+| P101       | Phone        | 500   |
+| P102       | Laptop       | 1200  |
+| P103       | Tablet       | 800   |
+| P104       | Printer      | 300   |
+
+#### `Fact_table_sales`
+
+| sale_id | product_id | store_id | sale_date  | amount |
+|---------|------------|----------|------------|--------|
+| S001    | P101       | ST01     | 2024-01-01 | 3      |
+| S002    | P102       | ST01     | 2024-01-02 | 1      |
+| S003    | P103       | ST02     | 2024-01-03 | 2      |
+| S004    | P102       | ST02     | 2024-01-04 | 4      |
+| S005    | P104       | ST03     | 2024-01-05 | 1      |
+
+
+
+#### Voici l'index bitmap
+
+| "Corresponding Sale Line on Fact Table" | Product ID = P101 | Product ID = P102 | Product ID = P103 | Product ID = P104 |
+|--------------------------|--------------------|--------------------|--------------------|--------------------|
+| S001                    | 1                  | 0                  | 0                  | 0                  |
+| S002                    | 0                  | 1                  | 0                  | 0                  |
+| S003                    | 0                  | 0                  | 1                  | 0                  |
+| S004                    | 0                  | 1                  | 0                  | 0                  |
+| S005                    | 0                  | 0                  | 0                  | 1                  |
+
 C'est le temps d'interroger la base. Quel est le plan d'exécution de cette requête ? Que fait l'optimiseur Oracle ? Est ce que la table `Dim_table_product` est utilisée lors de l'évaluation ?
 ```sql
 EXPLAIN PLAN FOR
