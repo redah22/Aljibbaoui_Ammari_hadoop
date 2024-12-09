@@ -191,9 +191,7 @@ WHERE f.product_id = d.product_id;
 
 Voici un exemple illustré de notre index.
 
-### Assumed Data for Tables
-
-#### `Dim_table_product`
+#### Dimension produit
 
 | product_id | name         | price |
 |------------|--------------|-------|
@@ -202,7 +200,7 @@ Voici un exemple illustré de notre index.
 | P103       | Tablet       | 800   |
 | P104       | Printer      | 300   |
 
-#### `Fact_table_sales`
+#### Table des Faits
 
 | sale_id | product_id | store_id | sale_date  | amount |
 |---------|------------|----------|------------|--------|
@@ -213,8 +211,9 @@ Voici un exemple illustré de notre index.
 | S005    | P104       | ST03     | 2024-01-05 | 1      |
 
 
+#### Index bitmap
 
-#### Voici l'index bitmap
+Voici l'index. Notons la création d'une join-bitmap pour chaque valeur de l'identifiant produit. Par exemple, le produi 102 est utilisé dans deux lignes de la table de faits (correspondants aux ventes `S002` et `S004`) et, par conséquent, son bitmap contient deux bit à `1` aux positions associées à ces lignes.
 
 | "Corresponding Sale Line on Fact Table" | Product ID = P101 | Product ID = P102 | Product ID = P103 | Product ID = P104 |
 |--------------------------|--------------------|--------------------|--------------------|--------------------|
