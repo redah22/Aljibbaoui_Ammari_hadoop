@@ -8,6 +8,9 @@ L'objectif ici est d'exécuter les différentes parties du script et comprendre 
 
 ## Premièr type d'index : Bitmap (no join)
 
+Les index Bitmap sont particulièrement utiles lorsque vous travaillez avec des colonnes ayant une faible cardinalité, comme des genres (`M` ou `F`) ou des notes (`1`, `2`, etc.). Dans cette section, nous explorons leur création et utilisation.
+
+
 Petit nettoyage de la base au cas où vous aviez déjà exécuté ce script ; sauter cette partie si ce n'est pas le cas.
 ```sql
 BEGIN
@@ -94,6 +97,9 @@ SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 Pour aller plus loin : le script `bitmap_index.sql` présente également la création d'un index bitmap sur la colonne `rating`. Vous pouvez tester les requêtes et visualiser les plans d'exécution. Vous pouvez aussi donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index.
 
 ## Deuxième type d'index : Join Bitmap
+
+Les index Join Bitmap permettent d'optimiser les jointures entre deux tables. Ils sont utiles lorsque la table de faits (fact table) contient beaucoup de données et que les jointures se font sur une colonne ayant une faible cardinalité.
+
 
 Avant de commencer, nous supprimons les tables existantes pour éviter les conflits ou les erreurs lors de la création des nouvelles tables.
 
