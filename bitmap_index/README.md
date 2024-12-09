@@ -37,13 +37,25 @@ END;
 Ensuite, nous allons créer des tables et y mettre quelques données. L'étape d'ajout des données est nécessaire pour que les indexes soient utilisés. En effet, pour des trop petits volumes de données leur utilisation pourrait être ignorée. 
 
 ```sql
--- Step 1: Create the Dimension Table 
+
+-- Step 1: 
+-- Create the Dimension Table 
 CREATE TABLE Dim_table_product (
     product_id VARCHAR2(10),
     name VARCHAR2(50),
     price NUMBER
 );
 
+-- Create the Fact Table 
+CREATE TABLE Fact_table_sales (
+    sale_id VARCHAR2(10),
+    product_id VARCHAR2(10),
+    store_id VARCHAR2(10),
+    sale_date DATE,
+    amount NUMBER
+);
+
+Step 2: Populate the tables
 -- Populate Dimension Table with 1000 Rows
 BEGIN
     FOR i IN 1..1000 LOOP
@@ -54,22 +66,13 @@ BEGIN
 END;
 /
 
--- Step 2: Create the Fact Table 
-CREATE TABLE Fact_table_sales (
-    sale_id VARCHAR2(10),
-    product_id VARCHAR2(10),
-    store_id VARCHAR2(10),
-    sale_date DATE,
-    amount NUMBER
-);
-
 -- Populate Fact Table with 10,000 Rows and Restrict Products to Even Numbers
 BEGIN
     FOR i IN 1..10000 LOOP
         INSERT INTO Fact_table_sales (sale_id, product_id, store_id, sale_date, amount)
         VALUES (
             's' || TO_CHAR(i), 
-            'p' || TO_CHAR(2 * MOD(i, 500) + 2), -- Only even product IDs
+            'p' || TO_CHAR(2 * MOD(i, 500) + 2), -- Only even product IDs, for data variability
             'store_' || TO_CHAR(MOD(i, 50) + 1), 
             SYSDATE, 
             MOD(i, 500) + 50
@@ -79,6 +82,9 @@ BEGIN
 END;
 /
 ```
+
+À ce point, lancez une requête pour visualer le contenu des deux tables!
+
 
 Nous allons maintenant ajouter des index. Noter que le join-index doit nécessairement porter sur une clé primaire (dans ce cas l'identifiant du produit).
 
