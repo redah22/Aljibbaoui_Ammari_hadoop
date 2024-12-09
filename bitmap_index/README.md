@@ -1,11 +1,100 @@
 Index BitMap
 ===
 
-Le script permet de familiariser avec la déclaration d'index bitmap, ainsi qu'avec leur utilisation par l'optimiseur Oracle lorsqu'il essaye de construire le plan d'accès pour repondre à la requête.
+Les scripts mis à disposition permettent de familiariser avec la déclaration d'indexes de type bitmap et join-bitmap, ainsi qu'avec leur utilisation par l'optimiseur Oracle lorsqu'il essaye de construire le plan d'accès pour repondre à la requête.
 
 Travail à faire : 
 1. Exécuter les différentes parties du script et comprendre ce qui se passe dans chaque partie.
 2. Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index
+
+
+## Bitmap (no join)
+
+Petit nettoyage de la base (au cas où vous aviez déjà exécuté ce script)
+```sql
+BEGIN
+    EXECUTE IMMEDIATE 'DROP INDEX idx_rating';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP INDEX idx_gender';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+DROP TABLE IF EXISTS Customers CASCADE;
+```
+
+Commençons par créer une table dimensionelle pour les clients et y ajoutons des données.
+
+```sql
+CREATE TABLE Customers (
+    custid NUMBER PRIMARY KEY,
+    name VARCHAR2(50),
+    gender CHAR(1),
+    rating NUMBER
+);
+
+INSERT INTO Customers (custid, name, gender, rating) VALUES (112, 'Joe', 'M', 3);
+INSERT INTO Customers (custid, name, gender, rating) VALUES (115, 'Ram', 'M', 5);
+INSERT INTO Customers (custid, name, gender, rating) VALUES (119, 'Sue', 'F', 5);
+INSERT INTO Customers (custid, name, gender, rating) VALUES (116, 'Woo', 'M', 4);
+INSERT INTO Customers (custid, name, gender, rating) VALUES (120, 'Ana', 'F', 3);
+INSERT INTO Customers (custid, name, gender, rating) VALUES (121, 'Tom', 'M', 1);
+INSERT INTO Customers (custid, name, gender, rating) VALUES (122, 'Eve', 'F', 2);
+
+COMMIT;
+```
+### Voici le contenu de la table.
+
+| custid | name | gender | rating |
+|--------|------|--------|--------|
+| 112    | Joe  | M      | 3      |
+| 115    | Ram  | M      | 5      |
+| 119    | Sue  | F      | 5      |
+| 116    | Woo  | M      | 4      |
+| 120    | Ana  | F      | 3      |
+| 121    | Tom  | M      | 1      |
+| 122    | Eve  | F      | 2      |
+
+Continuons avec la création des index.
+
+```sql
+CREATE BITMAP INDEX idx_gender ON Customers (gender);
+```
+
+Voici le contenu de l'index 
+
+| custid | Gender = M | Gender = F |
+|--------|------------|------------|
+| 112    | 1          | 0          |
+| 115    | 1          | 0          |
+| 119    | 0          | 1          |
+| 116    | 1          | 0          |
+| 120    | 0          | 1          |
+| 121    | 1          | 0          |
+| 122    | 0          | 1          |
+
+
+
+Combien d'index sont utilisés par la requête suivante ?
+```
+-- sql
+SELECT custid, name, gender, rating
+FROM Customers
+WHERE rating = 5 AND gender = 'M';
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+```
+
+Le script `bitmap_index.sql' présente également la création d'un index bitmap sur la colonne `rating`. 
+
+
+## Join Bitmap
 
 Avant de commencer, nous supprimons les tables existantes pour éviter les conflits ou les erreurs lors de la création des nouvelles tables.
 
