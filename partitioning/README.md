@@ -10,6 +10,42 @@ Chaque section du script est accompagnée d'exemples pour tester et comprendre l
 
 ---
 
+Petit néttoyage de la base au cas où vous exécutiez ce script plusieurs fois.
+
+```sql
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients_Statique CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TABLE Clients_Dynamique CASCADE CONSTRAINTS';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+
+BEGIN
+    EXECUTE IMMEDIATE 'DROP VIEW Clients_Complet';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+```
+
+Ready to go.
+
+---
+
 ## 1. Partitionnement par Lignes 
 
 Le partitionnement par **LIST** consiste à séparer les données en partitions basées sur des valeurs spécifiques.
