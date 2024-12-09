@@ -1,16 +1,16 @@
 Index BitMap
 ===
 
-Les scripts mis à disposition permettent de familiariser avec la déclaration d'indexes de type bitmap et join-bitmap, ainsi qu'avec leur utilisation par l'optimiseur Oracle lorsqu'il essaye de construire le plan d'accès pour repondre à la requête.
+Les scripts mis à disposition permettent de familiariser avec la déclaration d'indexes de type bitmap et join-bitmap, ainsi qu'avec leur utilisation par l'optimiseur Oracle.
 
 Travail à faire : 
 1. Exécuter les différentes parties du script et comprendre ce qui se passe dans chaque partie.
 2. Donner d'autres exemples requêtes et qui utilisent et qui n'utilisent pas l'index
 
 
-## Bitmap (no join)
+## Premièr type d'index : Bitmap (no join)
 
-Petit nettoyage de la base (au cas où vous aviez déjà exécuté ce script)
+Petit nettoyage de la base au cas où vous aviez déjà exécuté ce script ; sauter cette partie si ce n'est pas le cas.
 ```sql
 BEGIN
     EXECUTE IMMEDIATE 'DROP INDEX idx_rating';
@@ -29,7 +29,7 @@ END;
 DROP TABLE IF EXISTS Customers CASCADE;
 ```
 
-Commençons par créer une table dimensionelle pour les clients et y ajoutons des données.
+Commençons par créer une table dimensionelle pour les clients et ajoutons des données.
 
 ```sql
 CREATE TABLE Customers (
@@ -80,6 +80,8 @@ Voici le contenu de l'index
 | 122    | 0          | 1          |
 
 
+On peut maintenant s'interesser à l'interrogation.
+
 
 Combien d'index sont utilisés par la requête suivante ?
 ```
@@ -91,10 +93,10 @@ WHERE rating = 5 AND gender = 'M';
 SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
 ```
 
-Le script `bitmap_index.sql' présente également la création d'un index bitmap sur la colonne `rating`. 
+Pour aller plus loin : le script `bitmap_index.sql` présente également la création d'un index bitmap sur la colonne `rating`. 
 
 
-## Join Bitmap
+## Deuxième type d'index : Join Bitmap
 
 Avant de commencer, nous supprimons les tables existantes pour éviter les conflits ou les erreurs lors de la création des nouvelles tables.
 
@@ -123,7 +125,7 @@ END;
 ```
 
 
-Ensuite, nous allons créer des tables et y mettre quelques données. L'étape d'ajout des données est nécessaire pour que les indexes soient utilisés. En effet, pour des trop petits volumes de données leur utilisation pourrait être ignorée. 
+Ensuite, nous allons créer des tables et y mettre quelques données. L'étape d'ajout des données est nécessaire pour que les indexes soient utilisés. En effet, pour des petits volumes de données l'optimiseur pourrait choisir de ne pas les utilisers (ce choix est parfaitement justifié si les données ne sont pas volumineuses). Pour remarquer le véritable effet des indexes sur le temps d'accès aux données il faut travailler avec des volumes de données plus conséquents (à tester sur vos machines personnelles). 
 
 ```sql
 
