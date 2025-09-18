@@ -50,7 +50,7 @@ VALUES ('film1','cinema24','date2','temps3','place44','7.50');
 
 ---
 
-## 3) Requêtes Analytiques
+## 3) Requêtes Analytiques Monoprix
 
 Considérez la table de faits (simplifiée) suivante, enregistrant les ventes journalières chez Monoprix :
 
@@ -63,6 +63,8 @@ CREATE TABLE ventes_monoprix (
   montant_journalier NUMBER(10,2) NOT NULL
 );
 ```
+
+Vous pouvez remplir la base à partir des données disponibles dans le fichier `DW_monoprix.sql`.
 
 Exprimez en SQL les interrogations suivantes à l'aide de `GROUP BY` :
 
