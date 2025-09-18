@@ -1,8 +1,5 @@
-# TP : Introduction aux Entrepôts de données  
-
-TD à rendre, les consignes et les délais sont indiqués sur Moodle.
-
----
+TP : Introduction aux Entrepôts de données  
+===
 
 ## 1) Les interrogations : requêtes transactionnelles vs analytiques
 
