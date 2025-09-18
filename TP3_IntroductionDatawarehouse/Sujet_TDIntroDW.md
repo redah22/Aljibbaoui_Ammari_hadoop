@@ -64,7 +64,7 @@ CREATE TABLE ventes_monoprix (
 );
 ```
 
-Vous pouvez remplir la base à partir des données disponibles dans le fichier `DW_monoprix.sql`.
+Vous pouvez remplir la base à partir des données disponibles dans le fichier `DW_monoprix.sql` disponible dans le repertoire.
 
 Exprimez en SQL les interrogations suivantes à l'aide de `GROUP BY` :
 
