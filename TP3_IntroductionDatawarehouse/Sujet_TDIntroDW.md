@@ -1,6 +1,9 @@
 TP : Introduction aux Entrepôts de données  
 ===
 
+L'objectif de ce TP est de consolider les notions de base utilisées dans le cadre des entrepôts de données : une étape fondamentale pour développer d'autres thèmes dans la suite du module.
+Le travail personnel consiste à adresser l'ensemble des questions de ce document, ainsi qu'à rédiger vos reponses de façon claire et concise dans un document que vous devrez rendre dans Moodle.
+
 ## 1) Les interrogations : requêtes transactionnelles vs analytiques
 
 Considérons le cas d'un système d'information d'une chaine nationale de cinémas multisalles.  
