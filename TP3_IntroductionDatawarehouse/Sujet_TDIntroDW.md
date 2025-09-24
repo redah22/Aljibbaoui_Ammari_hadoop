@@ -2,7 +2,8 @@ TP : Introduction aux Entrepôts de données
 ===
 
 L'objectif de ce TP est de consolider les notions de base utilisées dans le cadre des entrepôts de données : une étape fondamentale pour développer d'autres thèmes dans la suite du module.
-Le travail personnel consiste à adresser l'ensemble des questions de ce document, ainsi qu'à rédiger vos reponses de façon claire et concise dans un document que vous devrez rendre dans Moodle.
+Le travail personnel consiste à adresser l'ensemble des questions de ce document, ainsi qu'à rédiger vos reponses de façon claire et concise dans un document (word, latex, ou équivalent) que vous devrez rendre dans Moodle. 
+Ne sous éstimez pas l'utilité de la rédaction, qui vous aide à conceptualiser et structurer vos connaissances. 
 
 ## 1) Les interrogations : requêtes transactionnelles vs analytiques
 
@@ -13,7 +14,7 @@ Pour chacune des requêtes suivantes, identifiez s’il s’agit d’une requêt
 
 2. Aurait-on éventuellement pu proposer des plus grandes salles et plus de séances pour le dernier film de *Star Wars* ?
 
-3. 
+3. (Traduire la requête suivante en langage naturel, puis indiquer s'il s'agit d’une requête transactionnelle ou analytique)
 ```sql
 SELECT Film.titre, Cinema.nom, Date.mois, COUNT(Place.placeID)
 FROM Film, Ventes, Cinema, Place, Temps, Date
@@ -25,7 +26,7 @@ WHERE Ventes.filmID = Film.filmID
 GROUP BY Film.titre, Cinema.nom, Date.mois;
 ```
 
-4. 
+4. (Traduire la requête suivante en langage naturel, puis indiquer s'il s'agit d’une requête transactionnelle ou analytique)
 ```sql
 SELECT Temps.crenau, COUNT(*)
 FROM Ventes, Temps
@@ -33,7 +34,7 @@ WHERE Ventes.tempsID = Temps.tempsID
 GROUP BY Temps.creneau;
 ```
 
-5. 
+5. (Traduire la requête suivante en langage naturel, puis indiquer s'il s'agit d’une requête transactionnelle ou analytique)
 ```sql
 INSERT INTO Ventes 
 VALUES ('film1','cinema24','date2','temps3','place44','7.50');
