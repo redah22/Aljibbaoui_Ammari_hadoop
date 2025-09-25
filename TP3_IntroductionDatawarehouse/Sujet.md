@@ -7,7 +7,7 @@ TP : Introduction aux Entrepôts de données
 
 - **Utilisation IA.** L'utilisation des IA est déconséillée à ce stade, car l'intérêt du TP est de prendre du temps pur réfléchir aux questions, et maîtriser en autonomie des concepts qui sont *nouveaux* (e.g., discerner requêtes analytiques et transactionnelles, définir un modèle en étoile). 
 Cet intérêt perd de sa force si l'IA le fait pour nous ... et même l'IA n'est pas à l'abri des erreurs ;-) 
-La bonne approche consiste à utiliser l'IA pour accélerer notre travail lorsqu'on est en mesure de pouvoir **vérifier** les réponses qu'elle nous fournit, ce qui requiert d'abord de s'approprier du sujet. 
+L'approche conseillée est d'utiliser l'IA pour accélerer notre travail lorsqu'on est en mesure de pouvoir **vérifier** les réponses qu'elle nous fournit, ce qui requiert d'abord de s'approprier du sujet. 
 
 ## 1) Les interrogations : requêtes transactionnelles vs analytiques
 
