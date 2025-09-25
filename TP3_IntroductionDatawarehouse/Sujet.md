@@ -5,8 +5,9 @@ TP : Introduction aux Entrepôts de données
 
 - **Travail demandé.** Le travail personnel consiste à adresser l'ensemble des questions de ce document, ainsi qu'à rédiger vos reponses de façon claire et concise dans un document (word, latex, ou équivalent) que vous devrez rendre dans Moodle.  Ne sous éstimez pas l'utilité de la rédaction, qui vous aide à conceptualiser et structurer vos connaissances. 
 
-- **Utilisation IA.** L'utilisation des IA est déconséillée à ce stade, car l'intérêt du TP est de réfléchir aux questions pour arriver en autonomie à maîtriser des concepts (e.g., discerner requêtes analytiques et transactionnelles). Cet intérêt se pert si l'IA le fait pour nous à ce stade  ... et même l'IA n'est pas à l'abri des erreurs ;-) 
-La bonne approche consiste à utiliser l'IA pour accélerer notre travail lorsqu'on est en mesure de pouvoir **vérifier** les réponses qu'elle nous fournit, ce qui demande d'abord de s'approprier du sujet. 
+- **Utilisation IA.** L'utilisation des IA est déconséillée à ce stade, car l'intérêt du TP est de prendre du temps pur réfléchir aux questions, et maîtriser en autonomie des concepts qui sont *nouveaux* (e.g., discerner requêtes analytiques et transactionnelles, définir un modèle en étoile). 
+Cet intérêt perd de sa force si l'IA le fait pour nous ... et même l'IA n'est pas à l'abri des erreurs ;-) 
+La bonne approche consiste à utiliser l'IA pour accélerer notre travail lorsqu'on est en mesure de pouvoir **vérifier** les réponses qu'elle nous fournit, ce qui requiert d'abord de s'approprier du sujet. 
 
 ## 1) Les interrogations : requêtes transactionnelles vs analytiques
 
