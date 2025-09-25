@@ -1,9 +1,11 @@
 TP : Introduction aux Entrepôts de données  
 ===
 
-L'objectif de ce TP est de consolider les notions de base utilisées dans le cadre des entrepôts de données : une étape fondamentale pour développer d'autres thèmes dans la suite du module.
-Le travail personnel consiste à adresser l'ensemble des questions de ce document, ainsi qu'à rédiger vos reponses de façon claire et concise dans un document (word, latex, ou équivalent) que vous devrez rendre dans Moodle. 
-Ne sous éstimez pas l'utilité de la rédaction, qui vous aide à conceptualiser et structurer vos connaissances. 
+- **Objectifs.** L'objectif de ce TP est de consolider les notions de base utilisées dans le cadre des entrepôts de données : une étape fondamentale pour développer d'autres thèmes dans la suite du module.
+
+- **Travail demandé.** Le travail personnel consiste à adresser l'ensemble des questions de ce document, ainsi qu'à rédiger vos reponses de façon claire et concise dans un document (word, latex, ou équivalent) que vous devrez rendre dans Moodle.  Ne sous éstimez pas l'utilité de la rédaction, qui vous aide à conceptualiser et structurer vos connaissances. 
+
+- **Utilisation IA.** L'utilisation des IA est déconséillée à ce stade, car l'intérêt du TP est de réfléchir aux questions pour arriver en autonomie à discerner requêtes analytiques et transactionnelles ; cet intérêt vient se perdre si l'IA le fait pour nous ... et même l'IA n'est pas à l'abri des erreurs ;-)
 
 ## 1) Les interrogations : requêtes transactionnelles vs analytiques
 
