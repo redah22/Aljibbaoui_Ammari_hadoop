@@ -1,4 +1,4 @@
-Ce dossier sert à la fois pour partager les consignes du projet et comme modèle pour organiser vos rendus.
+Ce dossier sert à la fois pour partager les consignes du projet et pour organiser les rendus demandés dans le cadre du projet.
 
 Liens utiles
 - [Énoncé (bientôt disponible)]()
