@@ -1,1 +1,0 @@
-Utiliser ce dossier pour déposer le code source (SQL, autre) développé dans le cadre du mini-projet.
