@@ -248,7 +248,7 @@ SELECT
 FROM 
     Clients_Statique S
 JOIN 
-    Clients_Dynamique D ON S.Client_ID = D.Client_ID AND S.Pays = D.Pays;
+    Clients_Dynamique D ON S.Client_ID = D.Client_ID ;
 
 -- 6. Requêtes pour tester le partitionnement hybride
 
