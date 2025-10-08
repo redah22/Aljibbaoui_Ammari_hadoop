@@ -67,6 +67,8 @@ PARTITION BY LIST (Pays) (
 );
 ```
 
+Vous pouvez consulter les autres options de partitionnement [ici](https://docs.oracle.com/en/database/oracle/oracle-database/19/vldbg/partition-create-tables-indexes.html?utm_source=chatgpt.com#GUID-0CAB4231-E7DB-4245-9C43-C9CA352EC298)
+
 ### Insertion des Données
 ```sql
 INSERT INTO Clients VALUES (1, 'Alice Dupont', '10 rue des Lilas, Paris', 'France', TO_DATE('2022-01-10', 'YYYY-MM-DD'));
