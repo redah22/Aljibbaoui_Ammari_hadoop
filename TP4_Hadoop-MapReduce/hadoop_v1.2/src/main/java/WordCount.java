@@ -73,14 +73,23 @@ public class WordCount {
 
 		public void reduce(Text key, Iterable<IntWritable> values, Context context)
 				throws IOException, InterruptedException {
-			int sum = 0;
 
-			for (IntWritable val : values)
-				sum += val.get();
+            String cleaned = key.toString().toLowerCase();
+            cleaned = cleaned.replaceAll("[^a-z0-9àâäéèêëîïöôüûù]", " ");
 
-			context.write(key, new IntWritable(sum));
-		}
-	}
+            if (cleaned.length() <= 4 ) {
+                return;
+            }
+
+            int sum = 0;
+            for (IntWritable val : values)
+                sum += val.get();
+
+            if (sum >= 10){
+                context.write(new Text(cleaned), new IntWritable(sum));
+            }
+        }
+    }
 
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
