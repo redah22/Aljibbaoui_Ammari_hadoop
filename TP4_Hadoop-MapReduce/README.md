@@ -20,7 +20,10 @@ La programmation en Map-Reduce utilise le langage Java - avec ses avantages et i
 
 ## Format du rendu
 
-Il est demandé de rédiger un document expliquant en quelques lignes comment vous avez répondu à chaque question du TP. Il est important de mettre en évidence juste les points les plus importants vous ayant permis de répondre à la question. Le code Java produit est également à rendre, mais dans une archive `.zip`.
+Le TP est à faire en binômes.
+Il est demandé de (1) rédiger un document expliquant en quelques lignes comment vous avez répondu à chaque question du TP et (2) créer un dépôt git avec vos solutions et de l'indiquer (a) dans le document et (b) [ici](https://umontpellierfr-my.sharepoint.com/:x:/g/personal/federico_ulliana_umontpellier_fr/EUPXJoYsjWNPiVs_aufMgXYBR6qykXgO3-sKawZOEwDM8w?e=rWnVRb) ; si le lien n'est pas fourni ou le projet est inacessible (prévoir un test) le TP ne pourra pas être évalué. 
+Dans le document, est important de mettre en évidence juste les points les plus importants vous ayant permis de répondre à la question. 
+Le code Java n'est pas à déposer sur Moodle, car disponible dans votre git.
 
 ## Installation
 
