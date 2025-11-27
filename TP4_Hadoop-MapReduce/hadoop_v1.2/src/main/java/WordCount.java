@@ -75,7 +75,7 @@ public class WordCount {
 				throws IOException, InterruptedException {
 
             String cleaned = key.toString().toLowerCase();
-            cleaned = cleaned.replaceAll("[^a-z0-9àâäéèêëîïöôüûù]", " ");
+            cleaned = cleaned.replaceAll("[^a-z0-9àâäéèêëîïöôüûùç]", " ");
 
             if (cleaned.length() <= 4 ) {
                 return;
