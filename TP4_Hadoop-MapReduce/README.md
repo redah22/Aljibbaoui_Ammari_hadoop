@@ -33,7 +33,7 @@ Pour faire face aux différents soucis rencontres dans les différents systèmes
 
 Troubleshooting :
 - Problème avec `Kerberos` : ajouter variable d'environnement `HADOOP_USER_NAME`, voir [ici](https://gitlab.etu.umontpellier.fr/p00000013857/edbd/-/blob/main/TP4_Hadoop-MapReduce/doc/install.md#probl%C3%A8me-sur-les-nouveaux-postes-informatique)
-- Problème `security manager not active' avec IntelliJ. L'IDE IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK. forcer l'utilisation de Java 11, voir [ici](doc/install.md)
+- Problème `security manager not active' avec IntelliJ. L'IDE IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK. forcer l'utilisation de Java 11, voir [ici](https://gitlab.etu.umontpellier.fr/p00000013857/edbd/-/blob/main/TP4_Hadoop-MapReduce/doc/install.md#probl%C3%A8mes-de-securit%C3%A9-forcer-lutilisation-de-java-11)
 - Problème `file path does not exist' : changer les chemins des fichiers correspondant aux variables `INPUT_PATH` et `OUTPUT_PATH` dans `WordCount.java` 
 
 (Apologies) Windows n'est pas supporté. Vous pouvez essayer d'exécuter une machine virtuelle Linux depuis votre système Windows. Une altre possibilité est d'installer Hadoop sous Windows.
