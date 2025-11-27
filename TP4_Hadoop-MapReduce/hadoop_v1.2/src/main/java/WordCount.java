@@ -48,50 +48,50 @@ public class WordCount {
 		}
 	}
 
-	public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
-		private final static IntWritable one = new IntWritable(1);
-		private final static String emptyWords[] = { "" };
+    public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
+        private final static IntWritable one = new IntWritable(1);
+        private Text word = new Text();
 
-		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-			String line = value.toString();
+        public void map(LongWritable key, Text value, Context context)
+                throws IOException, InterruptedException {
 
-			// Une méthode pour créer des messages de log
-			//LOG.info("MESSAGE INFO");
+            // 1) Convertir en minuscule
+            String line = value.toString().toLowerCase();
 
-			String[] words = line.split("\\s+");
+            // 2) Supprimer la ponctuation (garder lettres + chiffres + accents)
+            line = line.replaceAll("[^a-z0-9àâäéèêëîïöôüûùç\\s]", " ");
 
-			// La ligne est vide : on s'arrête
-			if (Arrays.equals(words, emptyWords))
-				return;
+            // 3) Découper en mots
+            String[] words = line.split("\\s+");
 
-			for (String word : words)
-				context.write(new Text(word), one);
-		}
-	}
-
-	public static class Reduce extends Reducer<Text, IntWritable, Text, IntWritable> {
-
-		public void reduce(Text key, Iterable<IntWritable> values, Context context)
-				throws IOException, InterruptedException {
-
-            String cleaned = key.toString().toLowerCase();
-            cleaned = cleaned.replaceAll("[^a-z0-9àâäéèêëîïöôüûùç]", " ");
-
-            if (cleaned.length() <= 4 ) {
-                return;
+            for (String w : words) {
+                // 4) Filtrer mots trop courts
+                if (w.length() > 4) {
+                    word.set(w);
+                    context.write(word, one);
+                }
             }
+        }
+    }
+
+
+    public static class Reduce extends Reducer<Text, IntWritable, Text, IntWritable> {
+
+        public void reduce(Text key, Iterable<IntWritable> values, Context context)
+                throws IOException, InterruptedException {
 
             int sum = 0;
             for (IntWritable val : values)
                 sum += val.get();
 
-            if (sum >= 10){
-                context.write(new Text(cleaned), new IntWritable(sum));
+            if (sum >= 10) {
+                context.write(key, new IntWritable(sum));
             }
         }
     }
 
-	public static void main(String[] args) throws Exception {
+
+    public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
 
 		Job job = new Job(conf, "wordcount");
