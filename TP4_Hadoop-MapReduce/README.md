@@ -26,19 +26,21 @@ Il est demandé de rédiger un document expliquant en quelques lignes comment vo
 
 
 **Disclaimer** :
- : TP fonctionnel pour les configuratinos suivantes :
+ : Le TP a été testé et fonctionne pour les configurations suivantes : :
 
 1. Ordinateurs de la faculté, Ubuntu (Eclipse, IntelliJ)
 2. Ordinateurs personnels, Linux ou OSX (Eclipse, IntelliJ)
 
---> Windows n'est pas supporté (voir [ici](https://issues.apache.org/jira/browse/HADOOP-7682)).
+Windows n'est pas supporté (voir [ici](https://issues.apache.org/jira/browse/HADOOP-7682)).
+**Pourquoi ?** Car Hadoop est un système **distribué** complèxe qui, dans ce TP, sera exécuté de façon centralisée (sur votre compte informatique) pour des raisons pratiques. 
+Cela pose plusieurs défis techniques sous Windows qui ne sont pas adressés ici.
 
-**Pourquoi ?** Car Hadoop est un système **distribué** complèxe que, dans ce TP, sera exécuté de façon centralisée (sur votre compte informatique) pour des raisons évidentes. 
-Cela soulève des défis techniques sous Windows.
 
+Pour contourner les différences entre systèmes d’exploitation et environnements de développement (IDE), deux versions du TP sont mises à disposition.
+Essayez d’abord d’importer et de tester le projet avec la version v1.2.
+Si tout fonctionne correctement, vous pouvez passer à la section suivante.
 
-Pour faire face aux différents soucis rencontres dans les différents systèmes d'exploitation et IDE deux versions du TP sont mises à disposition. Essayez d'importer et tester le fonctionnement du projet avec la `v1.2`. Si tout va bien, passez à la section suivante. 
-Très probablement, dans votre IDE vous devrez : 
+Dans votre IDE, il est probable que vous deviez :
 - configurer Kerberos (sécurité)
 - configurer Java (version)
 
