@@ -11,7 +11,7 @@ Enfin, les exercices proposés constituent également une bonne préparation pou
 1. Le TP est à faire en binômes.
 2. Il s'agit d'écrire des programmes avec la bibliothèque Hadoop-Map/Reduce répondant aux questions.
 3. Il est demandé de 
-   - rédiger un document (3 pages max) expliquant comment vous avez répondu à chaque question du TP 
+   - rédiger un document (3 pages max, annexes exclus) expliquant comment vous avez répondu à chaque question du TP 
    - créer un dépôt git avec vos solutions et de l'indiquer (a) dans votre rendu et (b) dans le document [ici](https://umontpellierfr-my.sharepoint.com/:x:/g/personal/federico_ulliana_umontpellier_fr/EUPXJoYsjWNPiVs_aufMgXYBR6qykXgO3-sKawZOEwDM8w?e=rWnVRb) ; si le lien n'est pas fourni ou le projet est inacessible (prévoir un test) le TP ne pourra pas être évalué. Dans le document, est important de mettre en évidence juste les points les plus importants vous ayant permis de répondre à la question. Le code Java n'est pas à déposer sur Moodle, car disponible dans votre git.
 
 
