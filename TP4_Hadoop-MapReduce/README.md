@@ -24,19 +24,30 @@ Il est demandé de rédiger un document expliquant en quelques lignes comment vo
 
 ## Installation
 
-Disclaimer : TP fonctionnel pour les configuratinos suivantes :
+
+**Disclaimer** :
+ : TP fonctionnel pour les configuratinos suivantes :
 
 1. Ordinateurs de la faculté, Ubuntu (Eclipse, IntelliJ)
 2. Ordinateurs personnels, Linux ou OSX (Eclipse, IntelliJ)
 
-Pour faire face aux différents soucis rencontres dans les différents systèmes d'exploitation et IDE deux versions du TP sont mises à disposition. Essayez d'importer et tester le fonctionnement du projet avec la `v1.2`. Si tout va bien, passez à la section suivante.
+--> Windows n'est pas supporté (voir [ici](https://issues.apache.org/jira/browse/HADOOP-7682)).
+
+**Pourquoi ?** Car Hadoop est un système **distribué** complèxe que, dans ce TP, sera exécuté de façon centralisée (sur votre compte informatique) pour des raisons évidentes. 
+Cela soulève des défis techniques sous Windows.
+
+
+Pour faire face aux différents soucis rencontres dans les différents systèmes d'exploitation et IDE deux versions du TP sont mises à disposition. Essayez d'importer et tester le fonctionnement du projet avec la `v1.2`. Si tout va bien, passez à la section suivante. 
+Très probablement, dans votre IDE vous devrez : 
+- configurer Kerberos (sécurité)
+- configurer Java (version)
+
 
 Troubleshooting :
 - Problème avec `Kerberos` : ajouter variable d'environnement `HADOOP_USER_NAME`, voir [ici](https://gitlab.etu.umontpellier.fr/p00000013857/edbd/-/blob/main/TP4_Hadoop-MapReduce/doc/install.md#probl%C3%A8me-sur-les-nouveaux-postes-informatique)
 - Problème `security manager not active' avec IntelliJ. L'IDE IntelliJ pourrait utiliser une JVM différente de celle indiquée dans le `pom.xml`, ce qui produit une erreur concernant le Java security manager. Dans ce cas, indiquer explicitement l'utilisation de Java 11 pour votre projet. Dans le menu File > Project Structure > Project > Project SDK. forcer l'utilisation de Java 11, voir [ici](https://gitlab.etu.umontpellier.fr/p00000013857/edbd/-/blob/main/TP4_Hadoop-MapReduce/doc/install.md#probl%C3%A8mes-de-securit%C3%A9-forcer-lutilisation-de-java-11)
 - Problème `file path does not exist' : changer les chemins des fichiers correspondant aux variables `INPUT_PATH` et `OUTPUT_PATH` dans `WordCount.java` 
 
-(Apologies) Windows n'est pas supporté. Vous pouvez essayer d'exécuter une machine virtuelle Linux depuis votre système Windows. Une altre possibilité est d'installer Hadoop sous Windows.
 
 
 
@@ -112,6 +123,13 @@ SPOOL OFF;
 ## Un lien vers des exercices facultatifs, mais utiles pour la préparation à l'examen 
 
 Vous trouverez [ici](more/advanced_questions.md) une liste de question que vous pouvez utiliser pour travailler plus en profondeur la programmation en map/reduce.
+
+
+## Windows n'est pas supporté. 
+Vous pouvez éventuellement essayer d'exécuter une machine virtuelle Linux depuis votre système Windows. 
+Une altre possibilité est d'installer Hadoop sous Windows.
+Ces deux solutions peuvent prendre du temps, et notre conseil est d'utiliser les comptes informatiques de la FdS.
+
 
 
 
