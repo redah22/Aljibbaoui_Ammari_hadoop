@@ -10,28 +10,30 @@
 	<name>Hadoop Project</name>
 	<description>A Hadoop MapReduce project.</description>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.release>11</maven.compiler.release>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.release>11</maven.compiler.release>
 
-		<!-- Dependency versions -->
-		<commons-configuration-version>1.6</commons-configuration-version>
-		<commons-httpclient-version>3.1</commons-httpclient-version>
-		<commons-lang-version>2.6</commons-lang-version>
-		<commons-logging-version>1.1.3</commons-logging-version>
-		<hadoop-core-version>1.2.1</hadoop-core-version>
-		<jackson-core-asl-version>1.9.13</jackson-core-asl-version>
-		<jackson-mapper-asl-version>1.9.13</jackson-mapper-asl-version>
-		<!-- Logging library versions -->
-		<slf4j-version>2.0.12</slf4j-version>
-		<logback-version>1.2.11</logback-version>
-		<jcl-over-slf4j-version>1.7.36</jcl-over-slf4j-version>
-		<!-- Plugin versions -->
-		<maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
-		<maven-surefire-plugin-version>3.2.5</maven-surefire-plugin-version>
-		<maven-enforcer-plugin-version>3.5.0</maven-enforcer-plugin-version>
-		<maven-javadoc-plugin-version>3.10.0</maven-javadoc-plugin-version>
-	</properties>
+        <!-- Dependency versions -->
+        <commons-configuration-version>1.6</commons-configuration-version>
+        <commons-httpclient-version>3.1</commons-httpclient-version>
+        <commons-lang-version>2.6</commons-lang-version>
+        <commons-logging-version>1.1.3</commons-logging-version>
+        <hadoop-core-version>1.2.1</hadoop-core-version>
+        <jackson-core-asl-version>1.9.13</jackson-core-asl-version>
+        <jackson-mapper-asl-version>1.9.13</jackson-mapper-asl-version>
+        <!-- Logging library versions -->
+        <slf4j-version>2.0.12</slf4j-version>
+        <logback-version>1.2.11</logback-version>
+        <jcl-over-slf4j-version>1.7.36</jcl-over-slf4j-version>
+        <!-- Plugin versions -->
+        <maven-compiler-plugin-version>3.13.0</maven-compiler-plugin-version>
+        <maven-surefire-plugin-version>3.2.5</maven-surefire-plugin-version>
+        <maven-enforcer-plugin-version>3.5.0</maven-enforcer-plugin-version>
+        <maven-javadoc-plugin-version>3.10.0</maven-javadoc-plugin-version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
 
 
 	<dependencies>
