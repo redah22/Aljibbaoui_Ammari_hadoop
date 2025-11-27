@@ -85,10 +85,14 @@ Vous disposez d'un logger via la variable de classe `LOG`. Ces messages sont aus
 ## Exercices de préparation - Partie 1
 
 ### Exercice 0 - WordCount
-Tester le programme WordCount.
+Consulter le document fourni dans le dossier `input-wordCount` pour avoir un aperçu du contenu.
+Ensuite, tester le programme WordCount.
 
 ### Exercice 1 - WordCount + Filter
-Modifier la fonction reduce du programme WordCount.java pour afficher uniquement les mots ayant un nombre d’occurrences supérieur ou égal à deux.
+Modifier la fonction reduce du programme WordCount.java.
+1. Afficher uniquement les mots ayant un nombre d’occurrences supérieur ou égal à 10
+2. Supprimer la ponctuation, mettre le texte en minuscule, et exclure tous les mots de taille inférieure ou égale à 4 lettres de l'analyse
+3. Regardez le résultat : quels est le mot le plus fréquent ?
 
 ### Exercice 2 - Group-By
 Implémenter un opérateur de regroupement sur l'attribut `Customer-ID` dans GroupBy.java.  
