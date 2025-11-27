@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.time.Instant;
 import java.util.logging.FileHandler;
@@ -19,58 +18,107 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
 public class GroupBy {
-	private static final String INPUT_PATH = "input-groupBy/";
-	private static final String OUTPUT_PATH = "output/groupBy-";
-	private static final Logger LOG = Logger.getLogger(GroupBy.class.getName());
+    private static final String INPUT_PATH = "input-groupBy/";
+    private static final String OUTPUT_PATH = "output/groupBy-";
+    private static final Logger LOG = Logger.getLogger(GroupBy.class.getName());
 
-	static {
-		System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s%n%6$s");
+    static {
+        System.setProperty("java.util.logging.SimpleFormatter.format", "%5$s%n%6$s");
+        try {
+            FileHandler fh = new FileHandler("out.log");
+            fh.setFormatter(new SimpleFormatter());
+            LOG.addHandler(fh);
+        } catch (SecurityException | IOException e) {
+            System.exit(1);
+        }
+    }
 
-		try {
-			FileHandler fh = new FileHandler("out.log");
-			fh.setFormatter(new SimpleFormatter());
-			LOG.addHandler(fh);
-		} catch (SecurityException | IOException e) {
-			System.exit(1);
-		}
-	}
+    public static class Map extends Mapper<LongWritable, Text, Text, DoubleWritable> {
 
-	public static class Map extends Mapper<LongWritable, Text, Text, DoubleWritable> {
 
-		@Override
-		public void map(LongWritable key, Text value, Context context) {
-			// TODO: à compléter
-		}
-	}
+        private static final int COL_IDX_CUSTOMER_ID = 5;
+        private static final int COL_IDX_PROFIT = 18;
+        // -------------------------------
 
-	public static class Reduce extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
+        private Text customerId = new Text();
+        private DoubleWritable profit = new DoubleWritable();
 
-		@Override
-		public void reduce(Text key, Iterable<DoubleWritable> values, Context context)
-				throws IOException, InterruptedException {
-			// TODO: à compléter
-		}
-	}
+        @Override
+        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
+            String line = value.toString();
 
-	public static void main(String[] args) throws Exception {
-		Configuration conf = new Configuration();
+            // Ignore la ligne si elle est vide
+            if (line.isEmpty()) return;
 
-		Job job = new Job(conf, "GroupBy");
+            // 1. Découpage du CSV
+            // Note: Si votre CSV utilise des points-virgules, remplacez "," par ";"
+            String[] columns = line.split(",");
 
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
+            // Vérification de sécurité pour éviter les "ArrayIndexOutOfBoundsException"
+            if (columns.length > COL_IDX_PROFIT && columns.length > COL_IDX_CUSTOMER_ID) {
+                try {
+                    // 2. Extraction des données
+                    String strId = columns[COL_IDX_CUSTOMER_ID].trim();
+                    String strProfit = columns[COL_IDX_PROFIT].trim();
 
-		job.setMapperClass(Map.class);
-		job.setReducerClass(Reduce.class);
+                    // Nettoyage éventuel (ex: enlever les guillemets si présents)
+                    strId = strId.replaceAll("\"", "");
 
-		job.setOutputValueClass(DoubleWritable.class); 
+                    // Gestion des nombres (ex: convertir "100" en 100.0)
+                    double valProfit = Double.parseDouble(strProfit);
 
-		job.setInputFormatClass(TextInputFormat.class);
-		job.setOutputFormatClass(TextOutputFormat.class);
+                    // 3. Écriture (Clé = CustomerID, Valeur = Profit)
+                    customerId.set(strId);
+                    profit.set(valProfit);
+                    context.write(customerId, profit);
 
-		FileInputFormat.addInputPath(job, new Path(INPUT_PATH));
-		FileOutputFormat.setOutputPath(job, new Path(OUTPUT_PATH + Instant.now().getEpochSecond()));
+                } catch (NumberFormatException e) {
+                    // Ignore la ligne si le profit n'est pas un nombre (ex: ligne d'en-tête)
+                }
+            }
+        }
+    }
 
-		job.waitForCompletion(true);
-	}
+    public static class Reduce extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
+
+        private DoubleWritable totalProfit = new DoubleWritable();
+
+        @Override
+        public void reduce(Text key, Iterable<DoubleWritable> values, Context context)
+                throws IOException, InterruptedException {
+
+            double sum = 0.0;
+
+            // 1. Somme des profits pour ce client (clé)
+            for (DoubleWritable val : values) {
+                sum += val.get();
+            }
+
+            // 2. Écriture du résultat final
+            totalProfit.set(sum);
+            context.write(key, totalProfit);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Configuration conf = new Configuration();
+
+        Job job = new Job(conf, "GroupBy");
+
+        // Définition des classes Map et Reduce
+        job.setMapperClass(Map.class);
+        job.setReducerClass(Reduce.class);
+
+        // Définition des types de sortie (Clé = Text, Valeur = DoubleWritable)
+        job.setOutputKeyClass(Text.class);
+        job.setOutputValueClass(DoubleWritable.class);
+
+        job.setInputFormatClass(TextInputFormat.class);
+        job.setOutputFormatClass(TextOutputFormat.class);
+
+        FileInputFormat.addInputPath(job, new Path(INPUT_PATH));
+        FileOutputFormat.setOutputPath(job, new Path(OUTPUT_PATH + Instant.now().getEpochSecond()));
+
+        job.waitForCompletion(true);
+    }
 }
