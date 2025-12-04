@@ -1,0 +1,5 @@
+id_localisation,pays,region,ville,code_postal,type_zone
+1,France,Île-de-France,Paris,75001,urbaine
+2,France,Auvergne-Rhône-Alpes,Lyon,69000,urbaine
+3,Belgique,Bruxelles-Capitale,Bruxelles,1000,urbaine
+4,Espagne,Catalogne,Barcelone,08001,urbaine

@@ -1,0 +1,5 @@
+id_article,titre,marque,categorie,etat,matiere,couleur,taille,prix_initial,date_mise_en_ligne
+1001,Robe été,Zara,robe,bon,coton,bleu,M,15.00,2024-01-01
+1002,Jean slim,Levis,jean,très bon,denim,noir,L,25.00,2024-01-05
+1003,Manteau hiver,Uniqlo,manteau,bon,laine,gris,M,45.00,2024-01-07
+1004,Sneakers,Nike,chaussure,excellent,cuir,blanc,42,60.00,2024-01-02

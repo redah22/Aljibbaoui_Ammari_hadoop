@@ -1,0 +1,4 @@
+id_livraison,nom_transporteur,type_livraison,format_colis_attendu,est_international,option_suivi_inclus,delai_estime_min_jours,delai_estime_max_jours,zone_geographique,groupe_transporteur
+1,Mondial Relay,relais,S,f,t,2,4,France,MR
+2,Colissimo,domicile,M,f,t,1,3,France,LaPoste
+3,Chronopost,express,M,f,t,1,2,France,Express

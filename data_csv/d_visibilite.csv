@@ -1,0 +1,4 @@
+id_visibilite,type_service,nom_service,duree_service_jours,est_payant,description_service,niveau_priorite_affichage,groupe_service,canal_affichage,code_reference_service
+1,standard,Standard,0,f,visibilité normale,1,base,flux,STD
+2,boost,Boost,1,t,annonce mise en avant,2,premium,flux,BST
+3,spotlight,Spotlight,5,t,plusieurs articles mis en avant,3,premium,carrousel,SPT

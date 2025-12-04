@@ -1,0 +1,5 @@
+id_article,prix_actuel,statut,visibilite_courante,nombre_vues,nombre_favoris,date_derniere_modification
+1001,14.00,actif,standard,120,12,2024-01-10
+1002,22.00,vendu,boost,200,35,2024-01-11
+1003,40.00,actif,spotlight,150,20,2024-01-15
+1004,55.00,vendu,boost,300,50,2024-01-10

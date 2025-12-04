@@ -1,0 +1,6 @@
+id_vente,fk_vendeur,fk_acheteur,fk_article,fk_date_publication,fk_date_vente,fk_livraison,fk_visibilite,montant_vente,cout_option_visibilite,frais_protection,cout_livraison,duree_avant_vente_jours,nombre_vues_article,nombre_favoris,option_visibilite_active
+1,101,201,1001,20240110,20240115,1,1,14.00,0.00,0.80,3.50,5,120,12,f
+2,101,202,1002,20240111,20240115,2,2,22.00,1.50,0.80,4.00,4,200,35,t
+3,102,201,1003,20240115,20240202,1,3,40.00,2.00,1.00,5.00,18,150,20,t
+4,102,202,1004,20240110,20240111,3,2,55.00,1.50,1.00,6.00,1,300,50,t
+5,101,201,1002,20240110,20240115,1,2,22.00,1.50,0.80,4.00,5,200,35,t

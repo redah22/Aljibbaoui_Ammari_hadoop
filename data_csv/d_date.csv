@@ -1,0 +1,5 @@
+id_date,date_complete,annee,trimestre,mois,nom_mois,numero_semaine_annee,jour_du_mois,jour_semaine,est_weekend,saison
+20240110,2024-01-10,2024,T1,1,janvier,2,10,mercredi,f,hiver
+20240111,2024-01-11,2024,T1,1,janvier,2,11,jeudi,f,hiver
+20240115,2024-01-15,2024,T1,1,janvier,3,15,lundi,f,hiver
+20240202,2024-02-02,2024,T1,2,février,5,2,vendredi,f,hiver

@@ -1,0 +1,5 @@
+id_categorie,nom_categorie,categorie_parent,niveau_hierarchie,type_categorie
+1,Femme,,1,racine
+2,Vêtements,1,2,parent
+3,Robes,2,3,enfant
+4,Jeans,2,3,enfant
