@@ -1,0 +1,22 @@
+# Fichiers compilés Java et dossiers de build Maven
+*.class
+target/
+
+# Dossiers de sortie générés par Hadoop
+output/
+
+# Fichiers de log
+*.log
+logs/
+out.log
+
+# Fichiers de configuration d'IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
