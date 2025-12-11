@@ -2,7 +2,6 @@
 output/
 
 
-
 # Fichiers de rapport (LaTeX et PDF)
 rapport.tex
 *.pdf
