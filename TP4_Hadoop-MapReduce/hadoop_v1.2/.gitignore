@@ -1,8 +1,7 @@
 # Fichiers et dossiers générés par Hadoop
 output/
 
-# Données d'entrée
-input-*/
+
 
 # Fichiers de rapport (LaTeX et PDF)
 rapport.tex
