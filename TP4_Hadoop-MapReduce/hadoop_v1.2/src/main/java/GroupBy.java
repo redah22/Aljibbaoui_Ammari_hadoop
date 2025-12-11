@@ -36,18 +36,17 @@ public class GroupBy {
     }
 
     // =========================================================
-    //  EXERCICE 3 : ANALYSE PAR COMMANDE (ACTIF)
+    //  EXERCICE : TOTAL DES ACHATS PAR CLIENT
     // =========================================================
 
-    public static class MapExo3 extends Mapper<LongWritable, Text, Text, Text> {
+    public static class MapCustomerSales extends Mapper<LongWritable, Text, Text, DoubleWritable> {
 
-        // Index des colonnes (1=Order ID, 13=Product ID, 18=Quantity)
-        private int colOrder = 1;
-        private int colProduct = 13;
-        private int colQty = 18;
+        // Index des colonnes (6=Customer Name, 17=Sales)
+        private int colCustomerName = 6;
+        private int colSales = 17;
 
-        private Text orderId = new Text();
-        private Text infos = new Text();
+        private Text customerName = new Text();
+        private DoubleWritable sales = new DoubleWritable();
 
         @Override
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -56,27 +55,27 @@ public class GroupBy {
             // Ignorer les lignes vides
             if (line.isEmpty()) return;
 
-            // CORRECTION : Split sur virgule OU point-virgule pour éviter le fichier vide
+            // Split sur virgule (ou point-virgule au cas où)
+            // Note: Pour un vrai CSV avec virgules dans les champs, il faudrait un parser plus robuste (ex: OpenCSV)
+            // Ici on garde la logique simple du TP.
             String[] cols = line.split("[,;]");
 
-            if (cols.length > colQty) {
+            if (cols.length > colSales) {
                 try {
-                    // Nettoyage (.trim et .replaceAll) pour virer les guillemets et espaces
-                    String id = cols[colOrder].trim().replaceAll("\"", "");
-                    String product = cols[colProduct].trim().replaceAll("\"", "");
-                    String qtyStr = cols[colQty].trim().replaceAll("\"", "");
+                    // Nettoyage
+                    String name = cols[colCustomerName].trim().replaceAll("\"", "");
+                    String salesStr = cols[colSales].trim().replaceAll("\"", "");
 
-                    // On vérifie si c'est un nombre (exclut l'en-tête "Quantity")
-                    int testNum = Integer.parseInt(qtyStr);
+                    // Tentative de conversion en nombre
+                    double salesValue = Double.parseDouble(salesStr);
 
-                    orderId.set(id);
-                    // On combine ProductID et Quantité
-                    infos.set(product + ";" + testNum);
+                    customerName.set(name);
+                    sales.set(salesValue);
 
-                    context.write(orderId, infos);
+                    context.write(customerName, sales);
 
                 } catch (NumberFormatException e) {
-                    // Ignore la ligne d'en-tête
+                    // Ignore la ligne d'en-tête ou lignes mal formées
                 } catch (Exception e) {
                     System.err.println("Erreur ligne : " + line);
                 }
@@ -84,90 +83,35 @@ public class GroupBy {
         }
     }
 
-    public static class ReduceExo3 extends Reducer<Text, Text, Text, Text> {
+    public static class ReduceCustomerSales extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
 
         @Override
-        public void reduce(Text key, Iterable<Text> values, Context context)
-                throws IOException, InterruptedException {
-
-            Set<String> produitsUniques = new HashSet<>();
-            int totalExemplaires = 0;
-
-            for (Text val : values) {
-                String[] data = val.toString().split(";");
-
-                if (data.length == 2) {
-                    produitsUniques.add(data[0]); // Le Set gère les doublons tout seul
-                    totalExemplaires += Integer.parseInt(data[1]);
-                }
-            }
-
-            String res = " -> Nb Produits distincts: " + produitsUniques.size() +
-                    " | Total Exemplaires: " + totalExemplaires;
-
-            context.write(key, new Text(res));
-        }
-    }
-
-
-    //  ANCIENS EXOS (VENTES PAR DATE/STATE)
-
-    /*
-    public static class MapDateState extends Mapper<LongWritable, Text, Text, DoubleWritable> {
-        public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-            String line = value.toString();
-            if (line.isEmpty()) return;
-
-            String[] cols = line.split("[,;]"); // Split robuste
-
-            // Index supposés : Date=2, State=10, Sales=17
-            if (cols.length > 17) {
-                try {
-                    String date = cols[2].trim().replaceAll("\"", "");
-                    String state = cols[10].trim().replaceAll("\"", "");
-                    String salesStr = cols[17].trim().replaceAll("\"", "").replace(",", "."); // Gestion décimale
-
-                    String maCle = date + " - " + state;
-                    double profit = Double.parseDouble(salesStr);
-
-                    context.write(new Text(maCle), new DoubleWritable(profit));
-                } catch (Exception e) {}
-            }
-        }
-    }
-
-    public static class ReduceSum extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
         public void reduce(Text key, Iterable<DoubleWritable> values, Context context)
                 throws IOException, InterruptedException {
-            double somme = 0;
+
+            double totalSales = 0.0;
+
             for (DoubleWritable val : values) {
-                somme += val.get();
+                totalSales += val.get();
             }
-            context.write(key, new DoubleWritable(somme));
+
+            context.write(key, new DoubleWritable(totalSales));
         }
     }
-    */
-
 
     //  MAIN
 
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();
-        Job job = new Job(conf, "GroupBy - Exo 3");
+        Job job = new Job(conf, "GroupBy - Total Sales per Customer");
 
-        //CONFIG ACTIVE (EXO 3)
-        job.setMapperClass(MapExo3.class);
-        job.setReducerClass(ReduceExo3.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(Text.class); // Sortie finale = Texte
+        job.setJarByClass(GroupBy.class); // Important pour le cluster
 
-        // ONFIG ANCIENNE
-        /*
-        job.setMapperClass(MapDateState.class);
-        job.setReducerClass(ReduceSum.class);
+        job.setMapperClass(MapCustomerSales.class);
+        job.setReducerClass(ReduceCustomerSales.class);
+
         job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(DoubleWritable.class); // Sortie finale = Nombre
-        */
+        job.setOutputValueClass(DoubleWritable.class);
 
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
